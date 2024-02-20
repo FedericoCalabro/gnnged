@@ -1,0 +1,18 @@
+Far partire il codice è stato molto streamline con pochissime difficolta incontrate (ce l'ho fatta in 1 oretta).
+Per far partire il codice ho dovuto effettuare due piccole modifiche (che ho commentato con #TODO):
+- modificare leggermente il modo in cui faceva il parsing degli argumenti della CLI in quanto sto usando i notebook.
+- modificare la normalizzazione della GED: ho hard codato la stessa label per tutti i nodi.
+- usare il suo dataset originale (di 50 grafi per train e 50 grafi per test).
+
+Successive ho adattato il primo notebook per la generazione del dataset allo stesso standard usato in SimGNN (ogni esempio in un .json diverso) per facilitarmi il lavoro.
+
+Quindi ho generato dataset di varie dimensioni e preso nota del tempo di run sul mio pc personale lasciando tutte le impostazioni di default.
+-CPU -> amd 5800x3d 8/16
+-GPU -> amd 5700xt 8gb vram 
+-RAM -> 16gb 3733mhz
+(PENSO LA GPU NON È STATA USATO PER I CALCOLI IN QUANTO AMD, TUTTI I CALCOLI SONO STATI SVOLTI DALLA CPU)
+
+Vari test eseguiti:
+
+
+In tutto ciò ho studiato ed analizzato il codice capendo a grandi linee come funziona.
