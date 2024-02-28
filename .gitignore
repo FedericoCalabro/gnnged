@@ -159,6 +159,7 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 
-
-custom_dataset/**
 !custom_dataset/*.json
+custom_dataset/small/**
+custom_dataset/medium/**
+custom_dataset/smalldense/**
