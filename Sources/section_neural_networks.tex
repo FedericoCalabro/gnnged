@@ -1,0 +1,56 @@
+\section{Neural Networks}
+\label{sec:neural_networks}
+
+A \emph{neural network} is a computational model that is inspired by the way biological neural networks in the human brain process information. It consists of interconnected units called neurons that work together to solve specific problems. The basic building block of a neural network is the perceptron, which computes a weighted sum of its inputs and passes the result through an activation function.
+
+\subsubsection{Basic Structure of a Neural Network}
+
+A simple neural network [\autoref{fig:basic-nn}] consists of three types of layers:
+
+\begin{itemize}
+    \item \textbf{Input Layer}: The layer that receives the input data.
+    \item \textbf{Hidden Layers}: One or more intermediate layers that process the inputs received from the input layer.
+    \item \textbf{Output Layer}: The layer that produces the final output.
+\end{itemize}
+
+The following figure illustrates a basic neural network with one hidden layer:
+\subfile{Tikz/tikz_monolayer_feedforward}
+
+\subsection{Training Neural Networks}
+
+Training a neural network involves adjusting the weights of the connections to minimize the error between the predicted output and the actual output. This is typically done using a method called \emph{backpropagation} along with an optimization algorithm like \emph{gradient descent}.
+
+\subsubsection{Backpropagation}
+Backpropagation [\autoref{fig:backpropagation}] is an algorithm used to compute the gradient of the loss function with respect to each weight by the chain rule, iterating backward from the last layer to the first layer.
+\subfile{Tikz/tikz_backpropagation}
+
+\subsubsection{Gradient Descent}
+Gradient descent [\autoref{fig:grad-descent}] is an optimization algorithm used to minimize the loss function by iteratively moving towards the steepest descent, based on the computed gradients.
+\subfile{Tikz/tikz_gradient_descent}
+
+\subsection{Advanced Topics in Neural Networks}
+
+\subsubsection{Deep Neural Networks}
+A \emph{deep neural network} (DNN) is an artificial neural network with multiple hidden layers between the input and output layers. DNNs can model complex patterns and relationships in data, making them powerful tools for tasks such as image and speech recognition.
+\subfile{Tikz/tikz_multilayer_feedforward}
+
+\subsubsection{Convolutional Neural Networks}
+A \emph{convolutional neural network} (CNN) is a specialized type of neural network designed for processing structured grid data, like images. CNNs use convolutional layers that apply a series of filters to the input data to extract features.
+\subfile{Tikz/tikz_convolutional_nn}
+
+\subsubsection{Recurrent Neural Networks}
+A \emph{recurrent neural network} (RNN) is a type of neural network that is well-suited for sequential data, such as time series or natural language. RNNs have connections that form directed cycles, allowing information to persist.
+\subfile{Tikz/tikz_recurrent_nn}
+
+\subsection{Graph Neural Networks and Attention Mechanisms}
+
+\subsubsection{Graph Neural Networks}
+
+A \emph{graph neural network} (GNN) is a type of neural network designed to handle graph-structured data. GNNs generalize neural networks to work directly on the graph domain by incorporating the graph's structure into the learning process. Nodes in a GNN aggregate feature information from their neighbors through multiple layers, enabling the network to capture the dependencies and relationships inherent in the graph.
+\subfile{Tikz/tikz_message_passing}
+
+
+\subsubsection{Attention Mechanisms}
+Attention mechanisms are techniques used to enhance the performance of neural networks by dynamically focusing on relevant parts of the input data while processing. The most famous use of attention mechanisms is in the \emph{Transformer} model, which has revolutionized natural language processing tasks. The attention mechanism computes a weighted sum of values, where the weights are derived from the compatibility of the query with the corresponding keys, allowing the model to selectively focus on important parts of the input.
+The combination of GNNs and attention mechanisms has shown significant promise in various applications, such as molecular property prediction, social network analysis, and more.
+\subfile{Tikz/tikz_attention_mechanism}

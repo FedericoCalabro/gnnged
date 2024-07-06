@@ -1,0 +1,27 @@
+\section{Graph Similarity Problem}
+\label{sec:graph_similarity_problem}
+The \emph{graph similarity problem} involves determining the degree of similarity between two graphs. This problem has numerous applications in pattern recognition, computer vision, bioinformatics, and other fields. One common method to quantify graph similarity is through the \emph{graph edit distance} (GED).
+
+\subsection{Graph Edit Distance (GED)}
+The \emph{graph edit distance} between two graphs $G_1 = (V_1, E_1)$ and $G_2 = (V_2, E_2)$ is defined as the minimum cost required to transform $G_1$ into $G_2$ using a sequence of atomic operations. Formally, let $\Sigma$ be the set of all possible edit operations, and let $c: \Sigma \to \mathbb{R}^+$ be a cost function that assigns a positive real number to each operation. The GED is then given by:
+\[
+\text{GED}(G_1, G_2) = \min_{\sigma \in \Sigma^*} \sum_{o \in \sigma} c(o)
+\]
+where $\Sigma^*$ denotes the set of all finite sequences of operations from $\Sigma$, and $o$ represents an individual operation within a sequence $\sigma$.
+
+The computation of GED is known to be \textbf{NP-HARD} \cite{NP_HARDNESS}, indicating that finding the exact minimum edit distance between two graphs is computationally intensive.
+
+\subsection{Atomic Operations}
+The basic atomic operations typically includes:
+\begin{itemize}
+    \item \textbf{Vertex Insertion}: Inserting a new vertex $v$ into the graph.
+    \item \textbf{Vertex Deletion}: Deleting an existing vertex $v$ from the graph.
+    \item \textbf{Edge Insertion}: Inserting a new edge $e = \{u, v\}$ into the graph.
+    \item \textbf{Edge Deletion}: Deleting an existing edge $e = \{u, v\}$ from the graph.
+\end{itemize}
+To demonstrate the Graph Edit Distance (GED), consider pair of graphs represented in \autoref{fig:ged-graphs}:
+\subfile{Tikz/tikz_atomic_operations}
+In this example, graph $G_1$ has vertex set $V_1 = \{A, B, C\}$ and edge set $E_1 = \{\{A, B\}, \{A, C\}, \{B, C\}\}$, while graph $G_2$ has vertex set $V_2 = \{A, B, C, D\}$ and edge set $E_2 = \{\{A, B\}, \{A, C\}, \{B, C\}, \{B, D\}\}$. The transformation (which cost is lowest) from $G_1$ to $G_2$ involves: Inserting the vertex $D$ and Inserting the edge $\{B, D\}$. If we assign a cost of 1 to each operation the total cost (GED) is: $1+1=2$.
+
+\subsection{SimGNN}
+SimGnn

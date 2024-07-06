@@ -1,0 +1,21 @@
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+        \node[circle, draw, fill=blue!20] (I1) at (0,2) {};
+        \node[circle, draw, fill=blue!20] (I2) at (0,1) {};
+        \node[circle, draw, fill=blue!20] (I3) at (0,0) {};
+        \node (I4) at (0,-1) {Input Layer};
+        \node[circle, draw, fill=green!20] (H1) at (2.5,1.5) {};
+        \node[circle, draw, fill=green!20] (H2) at (2.5,0.5) {};
+        \node (H3) at (2.5,-1) {Hidden Layer};
+        \node[circle, draw, fill=red!20] (O1) at (5,1) {};
+        \node (O2) at (5,-1) {Output Layer};
+        \foreach \i in {1,2,3}
+            \foreach \j in {1,2}
+                \draw[->] (I\i) -- (H\j);
+        \foreach \i in {1,2}
+            \draw[->] (H\i) -- (O1);
+    \end{tikzpicture}
+    \caption{A simple neural network with one hidden layer.}
+    \label{fig:basic-nn}
+\end{figure}
