@@ -1,8 +1,11 @@
+\documentclass[../Thesis.tex]{subfiles}
+\begin{document}
+
 \section{Graph Data Structure}
 \label{sec:graph_data_structure}
 
 A \emph{graph} $G$ [\autoref{fig:example-graph}] is a non-linear data structure consisting of vertices and edges. The vertices are sometimes also referred to as nodes and the edges are arcs that connect any two nodes in the graph. Graphs are used to represent relationships between different entities and have applications in many fields including Computer Science, Physics, Biology, Chemistry, Optimization Theory and many more.
-\subfile{Tikz/tikz_graph_example}
+\subfile{../Tikz/tikz_graph_example}
 
 \subsection{Formal Definition}
 A graph is formally defined as a tuple $G = (V, E)$, where:
@@ -15,29 +18,31 @@ A graph is formally defined as a tuple $G = (V, E)$, where:
 Graphs can be classified into various types based on their properties, including:
 \begin{itemize}
     \item \textbf{Directed Graph} [\autoref{fig:directed-graph}]: A graph in which the edges have a direction, i.e., each edge is an ordered pair of vertices.
-    \subfile{Tikz/tikz_directed_graph}
+    \subfile{../Tikz/tikz_directed_graph}
     \item \textbf{Undirected Graph} [\autoref{fig:undirected-graph}]: A graph in which the edges do not have a direction, i.e., each edge is an unordered pair of vertices.
-    \subfile{Tikz/tikz_undirected_graph}
+    \subfile{../Tikz/tikz_undirected_graph}
     
     \item \textbf{Weighted Graph} [\autoref{fig:weighted-graph}]: A graph in which a weight (or cost) is associated with each edge.
-    \subfile{Tikz/tikz_weighted_graph}
+    \subfile{../Tikz/tikz_weighted_graph}
     
     \item \textbf{Simple Graph} [\autoref{fig:simple-graph}]: A graph with no loops (edges connecting a vertex to itself) and no multiple edges (more than one edge connecting the same pair of vertices).
-    \subfile{Tikz/tikz_simple_graph}
+    \subfile{../Tikz/tikz_simple_graph}
     
     \item \textbf{Complete Graph} [\autoref{fig:complete-graph}]: A graph in which there is exactly one edge between each pair of distinct vertices.
-    \subfile{Tikz/tikz_complete_graph}
+    \subfile{../Tikz/tikz_complete_graph}
 
     \item \textbf{Bipartite Graph} [\autoref{fig:bipartite-graph}]: A graph whose vertices can be divided into two disjoint sets $U$ and $W$ such that every edge connects a vertex in $U$ to a vertex in $W$.
-    \subfile{Tikz/tikz_bipartite_graph}
+    \subfile{../Tikz/tikz_bipartite_graph}
 \end{itemize}
 
 \subsection{Graph Representation}
 Graphs can be represented in various ways, including:
 \begin{itemize}
     \item \textbf{Adjacency Matrix} [\autoref{fig:adjacency-matrix}]: A square matrix $A$ of size $|V| \times |V|$ where $A_{ij} = 1$ if there is an edge between vertices $v_i$ and $v_j$, and $A_{ij} = 0$ otherwise.
-    \subfile{Tikz/tikz_adjacency_matrix}
+    \subfile{../Tikz/tikz_adjacency_matrix}
     
     \item \textbf{Adjacency List} [\autoref{fig:adjacency-list-undirected}]: An array of lists. The array contains a list for each vertex, and each list contains the vertices that are adjacent to the corresponding vertex.
-    \subfile{Tikz/tikz_adjacency_list}
+    \subfile{../Tikz/tikz_adjacency_list}
 \end{itemize}
+
+\end{document}

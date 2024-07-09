@@ -159,9 +159,12 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 
-!custom_dataset/*.json
-custom_dataset/small/**
-custom_dataset/medium/**
-custom_dataset/smalldense/**
-custom_dataset/mediumdense/**
-/datasets
+# LatexStudio
+.eps
+.aux
+.bbl
+.blg
+.log
+.out
+.synctex.gz
+.toc
