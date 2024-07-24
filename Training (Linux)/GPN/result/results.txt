@@ -1,0 +1,120 @@
+## Training
+```
+model_name	dataset	graph_set	current_epoch	training_time(s/epoch)	training_loss(1000x)
+GPN	Linux	train	1	1573.2419972419739	3.046
+```
+
+## Testing
+```
+model_name	dataset	graph_set	#testing_pairs	time_usage(s/100p)	mse	mae	acc	fea	rho	tau	pk10	pk20
+GPN	Linux	test	20000	0.459	74.556	3.765	0.07	0.501	nan	nan	0.176	0.362
+```
+
+## Training
+```
+model_name	dataset	graph_set	current_epoch	training_time(s/epoch)	training_loss(1000x)
+GPN	Linux	train	2	1560.5022144317627	1.42
+```
+
+## Testing
+```
+model_name	dataset	graph_set	#testing_pairs	time_usage(s/100p)	mse	mae	acc	fea	rho	tau	pk10	pk20
+GPN	Linux	test	20000	0.451	56.623	3.014	0.154	0.564	nan	nan	0.166	0.44
+```
+
+## Training
+```
+model_name	dataset	graph_set	current_epoch	training_time(s/epoch)	training_loss(1000x)
+GPN	Linux	train	3	1531.9669630527496	0.842
+```
+
+## Testing
+```
+model_name	dataset	graph_set	#testing_pairs	time_usage(s/100p)	mse	mae	acc	fea	rho	tau	pk10	pk20
+GPN	Linux	test	20000	0.441	53.589	3.199	0.148	0.436	nan	nan	0.181	0.422
+```
+
+## Training
+```
+model_name	dataset	graph_set	current_epoch	training_time(s/epoch)	training_loss(1000x)
+GPN	Linux	train	4	649.2596461772919	0.661
+```
+
+## Testing
+```
+model_name	dataset	graph_set	#testing_pairs	time_usage(s/100p)	mse	mae	acc	fea	rho	tau	pk10	pk20
+GPN	Linux	test	20000	0.185	55.662	3.265	0.106	0.523	0.208	0.168	0.178	0.369
+```
+
+## Training
+```
+model_name	dataset	graph_set	current_epoch	training_time(s/epoch)	training_loss(1000x)
+GPN	Linux	train	5	649.070335149765	0.568
+```
+
+## Testing
+```
+model_name	dataset	graph_set	#testing_pairs	time_usage(s/100p)	mse	mae	acc	fea	rho	tau	pk10	pk20
+GPN	Linux	test	20000	0.185	58.222	3.397	0.114	0.562	0.181	0.147	0.122	0.326
+```
+
+## Training
+```
+model_name	dataset	graph_set	current_epoch	training_time(s/epoch)	training_loss(1000x)
+GPN	Linux	train	6	648.6288621425629	0.505
+```
+
+## Testing
+```
+model_name	dataset	graph_set	#testing_pairs	time_usage(s/100p)	mse	mae	acc	fea	rho	tau	pk10	pk20
+GPN	Linux	test	20000	0.185	50.96	3.046	0.099	0.454	0.271	0.21	0.13	0.35
+```
+
+## Training
+```
+model_name	dataset	graph_set	current_epoch	training_time(s/epoch)	training_loss(1000x)
+GPN	Linux	train	7	646.0094709396362	0.453
+```
+
+## Testing
+```
+model_name	dataset	graph_set	#testing_pairs	time_usage(s/100p)	mse	mae	acc	fea	rho	tau	pk10	pk20
+GPN	Linux	test	20000	0.183	54.724	3.31	0.088	0.475	0.204	0.161	0.142	0.349
+```
+
+## Training
+```
+model_name	dataset	graph_set	current_epoch	training_time(s/epoch)	training_loss(1000x)
+GPN	Linux	train	8	642.4280488491058	0.4
+```
+
+## Testing
+```
+model_name	dataset	graph_set	#testing_pairs	time_usage(s/100p)	mse	mae	acc	fea	rho	tau	pk10	pk20
+GPN	Linux	test	20000	0.183	69.03	3.625	0.082	0.477	0.074	0.052	0.097	0.305
+```
+
+## Training
+```
+model_name	dataset	graph_set	current_epoch	training_time(s/epoch)	training_loss(1000x)
+GPN	Linux	train	9	637.4702475070953	0.361
+```
+
+## Testing
+```
+model_name	dataset	graph_set	#testing_pairs	time_usage(s/100p)	mse	mae	acc	fea	rho	tau	pk10	pk20
+GPN	Linux	test	20000	0.183	56.055	3.273	0.077	0.465	0.11	0.093	0.106	0.299
+```
+
+## Training
+```
+model_name	dataset	graph_set	current_epoch	training_time(s/epoch)	training_loss(1000x)
+GPN	Linux	train	10	642.2772483825684	0.337
+```
+
+## Testing
+```
+model_name	dataset	graph_set	#testing_pairs	time_usage(s/100p)	mse	mae	acc	fea	rho	tau	pk10	pk20
+GPN	Linux	test	20000	0.183	58.0	3.279	0.066	0.44	0.177	0.131	0.094	0.277
+```
+
