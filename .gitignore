@@ -172,3 +172,4 @@ cython_debug/
 json_data
 model_save
 result
+Training *
