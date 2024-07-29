@@ -160,14 +160,14 @@ cython_debug/
 #.idea/
 
 # LatexStudio
-.eps
-.aux
-.bbl
-.blg
-.log
-.out
-.synctex.gz
-.toc
+*.eps
+*.aux
+*.bbl
+*.blg
+*.log
+*.out
+*.synctex.gz
+*.toc
 
 json_data
 model_save

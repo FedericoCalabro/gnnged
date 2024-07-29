@@ -12,7 +12,7 @@ The \emph{graph edit distance} between two graphs $G_1 = (V_1, E_1)$ and $G_2 = 
 \]
 where $\Sigma^*$ denotes the set of all finite sequences of operations from $\Sigma$, and $o$ represents an individual operation within a sequence $\sigma$.
 
-The computation of GED is known to be \textbf{NP-HARD} \cite{NP_HARDNESS}, indicating that finding the exact minimum edit distance between two graphs is computationally intensive.
+The computation of GED is known to be \textbf{NP-HARD}, indicating that finding the exact minimum edit distance between two graphs is computationally intensive.
 
 \subsection{Atomic Operations}
 The basic atomic operations typically includes:
@@ -25,9 +25,5 @@ The basic atomic operations typically includes:
 To demonstrate the Graph Edit Distance (GED), consider pair of graphs represented in [\autoref{fig:ged-graphs}]:
 \subfile{../Tikz/tikz_atomic_operations}
 In this example, graph $G_1$ has vertex set $V_1 = \{A, B, C\}$ and edge set $E_1 = \{\{A, B\}, \{A, C\}, \{B, C\}\}$, while graph $G_2$ has vertex set $V_2 = \{A, B, C, D\}$ and edge set $E_2 = \{\{A, B\}, \{A, C\}, \{B, C\}, \{B, D\}\}$. The transformation (which cost is lowest) from $G_1$ to $G_2$ involves: Inserting the vertex $D$ and Inserting the edge $\{B, D\}$. If we assign a cost of 1 to each operation the total cost (GED) is: $1+1=2$.
-
-\subsection{SimGNN}
-SimGnn
-
 
 \end{document}
