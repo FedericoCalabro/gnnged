@@ -1,0 +1,16 @@
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}
+		\node[circle, draw, fill=blue!20] (A) at (0,0) {A};
+		\node[circle, draw, fill=blue!20] (B) at (2,0) {B};
+		\node[circle, draw, fill=blue!20] (C) at (1,2) {C};
+		
+		\draw (A) -- (B);
+		\draw[bend left] (A) to (B);
+		\draw[bend right] (A) to (B);
+		\draw (A) -- (C);
+		\draw (B) -- (C);
+	\end{tikzpicture}
+	\caption{Multigraph example with multiple edges between vertices A and B.}
+	\label{fig:multigraph}
+\end{figure}

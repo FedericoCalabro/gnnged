@@ -1,0 +1,14 @@
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}
+		\node[circle, draw, fill=blue!20] (A) at (0,0) {A};
+		\node[circle, draw, fill=blue!20] (B) at (2,0) {B};
+		\node[circle, draw, fill=blue!20] (C) at (1,2) {C};
+		
+		\draw (A) -- (B);
+		\draw (A) -- (C);
+		\draw (B) -- (C);
+	\end{tikzpicture}
+	\caption{Clustering coefficient example showing a triangle, indicating a high clustering coefficient.}
+	\label{fig:clustering-coefficient-example}
+\end{figure}

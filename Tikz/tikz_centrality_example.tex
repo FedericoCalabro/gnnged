@@ -1,0 +1,17 @@
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}
+		\node[circle, draw, fill=blue!20] (A) at (0,0) {A};
+		\node[circle, draw, fill=blue!20] (B) at (2,0) {B};
+		\node[circle, draw, fill=blue!20] (C) at (1,2) {C};
+		\node[circle, draw, fill=blue!20] (D) at (3,2) {D};
+		\node[circle, draw, fill=blue!20] (E) at (4,0) {E};
+		
+		\draw (A) -- (B);
+		\draw (B) -- (C);
+		\draw (B) -- (D);
+		\draw (D) -- (E);
+	\end{tikzpicture}
+	\caption{Centrality example showing vertex B as a central node with high degree centrality.}
+	\label{fig:centrality-example}
+\end{figure}
