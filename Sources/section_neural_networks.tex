@@ -1,59 +1,137 @@
 \documentclass[../Thesis.tex]{subfiles}
 \begin{document}
+	
+	\section{Neural Networks}
+	\label{sec:neural_networks}
+	
+	A \emph{neural network} is a sophisticated computational model inspired by the intricate and highly parallel nature of biological neural networks found in the human brain. These models are designed to recognize patterns and solve complex problems by emulating the way neurons interact through synaptic connections. Just as the human brain processes information through a vast network of interconnected neurons, artificial neural networks utilize a collection of interconnected units, called neurons or nodes, to process data. Each neuron performs a simple computation, but when combined in a network, they can tackle a wide range of tasks from simple pattern recognition to advanced decision-making processes. 
+	
+	\subsection{Basic Structure of a Neural Network}
+	
+	A simple neural network [\autoref{fig:basic-nn}] consists of three main types of layers that collaborate to transform input data into meaningful outputs:
+	
+	\begin{itemize}
+		\item \textbf{Input Layer}: This layer consists of input neurons that receive the initial data. Each neuron in this layer corresponds to a feature in the input dataset. For example, in image recognition, each neuron might represent a pixel value.
+		\item \textbf{Hidden Layers}: These intermediate layers are where the actual computation and learning occur. Hidden layers can be one or more in number, depending on the complexity of the network. Each hidden layer consists of neurons that apply weights and activation functions to the inputs received from the previous layer, thereby transforming the data progressively.
+		\item \textbf{Output Layer}: The final layer in the network, which produces the output. The number of neurons in the output layer corresponds to the number of possible classes or output values in the problem. For instance, in a binary classification problem, there might be a single neuron that outputs a probability.
+	\end{itemize}
+	
+	The following figure illustrates a basic neural network with one hidden layer, showing how data flows from the input layer, through the hidden layer, to the output layer:
+	\subfile{../Tikz/tikz_monolayer_feedforward}
+	
+	\subsubsection{Activation Functions}
+	
+	In a neural network, each neuron from a previous layer connects to one or more neurons in subsequent layers through activation functions. These functions introduce non-linearity into the model, enabling it to capture complex patterns and relationships within the data. Without activation functions, a neural network, regardless of its depth, would only perform linear transformations, limiting its capacity to solve more intricate problems. Some commonly used activation functions include:
+	
+	\begin{itemize}
+		\item \textbf{Sigmoid}: This function maps any real-valued number into the range (0, 1). It is often used in the output layer for binary classification problems.
+		\[
+		\sigma(x) = \frac{1}{1 + e^{-x}}
+		\]
+		\item \textbf{Tanh}: The tanh function maps real-valued numbers into the range (-1, 1). It is zero-centered, which helps in having a more balanced output.
+		\[
+		\tanh(x) = \frac{2}{1 + e^{-2x}} - 1
+		\]
+		\item \textbf{ReLU (Rectified Linear Unit)}: This is the most commonly used activation function in modern neural networks. It outputs the input directly if it is positive; otherwise, it outputs zero.
+		\[
+		\text{ReLU}(x) = \max(0, x)
+		\]
+	\end{itemize}
+	
+\subsection{Training Neural Networks}
 
-\section{Neural Networks}
-\label{sec:neural_networks}
-
-A \emph{neural network} is a computational model that is inspired by the way biological neural networks in the human brain process information. It consists of interconnected units called neurons that work together to solve specific problems. The basic building block of a neural network is the perceptron, which computes a weighted sum of its inputs and passes the result through an activation function.
-
-\subsection{Basic Structure of a Neural Network}
-
-A simple neural network [\autoref{fig:basic-nn}] consists of three types of layers:
+Training a neural network is an iterative process aimed at finding the optimal weights that minimize the error between the network's predictions and the actual target values. This process involves adjusting the weights of the connections through a technique known as \emph{backpropagation} and using an optimization algorithm such as \emph{gradient descent}. To effectively train a model, the dataset is typically divided into three distinct subsets:
 
 \begin{itemize}
-    \item \textbf{Input Layer}: The layer that receives the input data.
-    \item \textbf{Hidden Layers}: One or more intermediate layers that process the inputs received from the input layer.
-    \item \textbf{Output Layer}: The layer that produces the final output.
+	\item \textbf{Training Set}: This subset is used to adjust the weights of the network. The model learns and updates its weights based on this data to minimize the error between its predictions and the actual values.
+	\item \textbf{Validation Set}: This subset is used to tune \emph{hyperparameters}, which are the parameters set before the training process begins (such as the learning rate, number of hidden layers, and number of neurons in each layer). Hyperparameters influence the model's architecture and training process, and finding the right values is crucial for achieving optimal performance. The validation set helps in selecting these hyperparameters and in monitoring the model’s performance to prevent \emph{overfitting}.
+	\item \textbf{Test Set}: This subset is used to evaluate the model's performance on data it has not seen before. It provides an unbiased assessment of how well the model generalizes to new, unseen data.
 \end{itemize}
 
-The following figure illustrates a basic neural network with one hidden layer:
-\subfile{../Tikz/tikz_monolayer_feedforward}
+\emph{Overfitting} occurs when a model learns the training data too well, capturing noise and details that do not generalize to new data. This results in high accuracy on the training set but poor performance on the test set. To mitigate overfitting, techniques such as regularization, dropout, and early stopping are employed to ensure the model generalizes well to unseen data.
 
-\subsection{Training Neural Networks}
-Training a neural network involves adjusting the weights of the connections to minimize the error between the predicted output and the actual output. This is typically done using a method called \emph{backpropagation} along with an optimization algorithm like \emph{gradient descent}. The training process involves multiple iterations, where in each iteration, the network processes a batch of input data, calculates the output, computes the error, and updates the weights to reduce this error.
-
-\subsubsection{Backpropagation}
-Backpropagation [\autoref{fig:backpropagation}] is an algorithm used to compute the gradient of the loss function with respect to each weight by the chain rule, iterating backward from the last layer to the first layer. During the forward pass, the input data propagates through the network layer by layer until the final output is obtained. The error is then calculated using a loss function, which measures the difference between the predicted output and the actual output. In the backward pass, this error is propagated back through the network, allowing the algorithm to compute the gradients of the loss function with respect to each weight. These gradients indicate how much the loss would change with a small change in the weights, guiding the weight update process.
-\subfile{../Tikz/tikz_backpropagation}
-
-\subsubsection{Gradient Descent}
-Gradient descent [\autoref{fig:grad-descent}] is an optimization algorithm used to minimize the loss function by iteratively moving towards the steepest descent, based on the computed gradients. At each iteration, the algorithm updates the weights by moving them in the opposite direction of the gradient of the loss function with respect to the weights. The size of these steps is determined by the learning rate, a hyperparameter that needs to be carefully chosen. A too large learning rate can cause the algorithm to overshoot the minimum, while a too small learning rate can make the convergence excessively slow.
-\subfile{../Tikz/tikz_gradient_descent}
-\subsection{Advanced Topics in Neural Networks}
-
-\subsubsection{Deep Neural Networks}
-A \emph{deep neural network} (DNN) [\autoref{fig:deep-nn}] is an artificial neural network with multiple hidden layers between the input and output layers. DNNs can model complex patterns and relationships in data, making them powerful tools for tasks such as image and speech recognition. The increased depth allows these networks to learn hierarchical representations of the data, capturing low-level features in the early layers and high-level features in the deeper layers. 
-\subfile{../Tikz/tikz_multilayer_feedforward}
-
-\subsubsection{Convolutional Neural Networks}
-A \emph{convolutional neural network} (CNN) [\autoref{fig:cnn}] is a specialized type of neural network designed for processing structured grid data, like images. CNNs use convolutional layers that apply a series of filters to the input data to extract features. These filters slide over the input data, performing element-wise multiplications and summing the results, which helps in detecting patterns such as edges, textures, and shapes.
-\subfile{../Tikz/tikz_convolutional_nn}
-
-\subsubsection{Recurrent Neural Networks}
-A \emph{recurrent neural network} (RNN) [\autoref{fig:rnn}] is a type of neural network that is well-suited for sequential data, such as time series or natural language. RNNs have connections that form directed cycles, allowing information to persist. This cyclic structure enables RNNs to maintain a hidden state that captures information from previous time steps, making them effective for tasks where the context is important, such as language modeling and machine translation.
-\subfile{../Tikz/tikz_recurrent_nn}
-
-\subsection{Graph Neural Networks and Attention Mechanisms}
-
-\subsubsection{Graph Neural Networks}
-A \emph{graph neural network} (GNN) is a type of neural network designed to handle graph-structured data. GNNs generalize neural networks to work directly on the graph domain by incorporating the graph's structure into the learning process. Nodes in a GNN aggregate feature information from their neighbors through multiple layers, enabling the network to capture the dependencies and relationships inherent in the graph. This message-passing mechanism [\autoref{fig:gnn}] allows GNNs to learn rich node representations and can be used for tasks such as node classification, link prediction, and graph classification. 
-\subfile{../Tikz/tikz_message_passing}
-
-
-\subsubsection{Attention Mechanisms}
-Attention mechanisms are techniques used to enhance the performance of neural networks by dynamically focusing on relevant parts of the input data while processing. The most famous use of attention mechanisms is in the \emph{Transformer} model, which has revolutionized natural language processing tasks. The attention mechanism [\autoref{fig:attention}] computes a weighted sum of values, where the weights are derived from the compatibility of the query with the corresponding keys, allowing the model to selectively focus on important parts of the input. This selective focus helps improve the efficiency and accuracy of the model, especially in tasks involving sequences, such as machine translation and text summarization.  
-The combination of GNNs and attention mechanisms has shown significant promise in various applications.
-\subfile{../Tikz/tikz_attention_mechanism}
-
-
+	
+	\subsubsection{Backpropagation}
+	Backpropagation [\autoref{fig:backpropagation}] is a fundamental algorithm used to compute the gradient of the loss function with respect to each weight in the network by applying the chain rule. This algorithm operates in two main phases: the forward pass and the backward pass. During the forward pass, input data is propagated through the network layer by layer until the final output is produced. The error is then calculated using a loss function, such as mean squared error for regression tasks. In the backward pass, this error is propagated back through the network, layer by layer, allowing the algorithm to compute the gradients of the loss function with respect to each weight. These gradients indicate the direction in which each weight should be adjusted to minimize the error, guiding the weight update process.
+	
+	The loss function \(L(\mathbf{y}, \mathbf{\hat{y}})\) measures the difference between the predicted output \(\mathbf{\hat{y}}\) and the actual output \(\mathbf{y}\). For example, in a regression task, the mean squared error (MSE) can be used:
+	
+	\[
+	L(\mathbf{y}, \mathbf{\hat{y}}) = \frac{1}{N} \sum_{i=1}^{N} (y_i - \hat{y}_i)^2
+	\]
+	
+	Backpropagation uses the chain rule to compute the gradient of the loss function with respect to each weight. The chain rule is a fundamental theorem in calculus used to compute the derivative of the composition of two or more functions. If a variable \(z\) depends on \(y\), and \(y\) depends on \(x\), then the chain rule states:
+	
+	\[
+	\frac{dz}{dx} = \frac{dz}{dy} \cdot \frac{dy}{dx}
+	\]
+	
+	In the context of neural networks, the chain rule helps in propagating the error gradient back through the network, enabling the adjustment of weights based on their contribution to the total error.
+	
+	\subfile{../Tikz/tikz_backpropagation}
+	
+	\subsubsection{Gradient Descent}
+	Gradient descent [\autoref{fig:grad-descent}] is an optimization algorithm used to minimize the loss function by iteratively adjusting the weights in the direction that reduces the error the most. At each iteration, the algorithm updates the weights by moving them in the opposite direction of the gradient of the loss function with respect to the weights. The size of these steps is determined by the learning rate, a crucial hyperparameter that needs to be carefully chosen to ensure the algorithm converges efficiently. The weight update rule for a weight \(w\) can be expressed as:
+	
+	\[
+	w \leftarrow w - \eta \frac{\partial L}{\partial w}
+	\]
+	
+	where \(\eta\) is the learning rate. Various variants of gradient descent, such as stochastic gradient descent (SGD) and mini-batch gradient descent, offer different trade-offs between computation time and convergence stability. Additionally, techniques like momentum, RMSprop, and Adam can further enhance the optimization process by adapting the learning rate during training. Momentum, for example, helps accelerate SGD in the relevant direction and dampens oscillations. RMSprop and Adam adapt the learning rate for each parameter, making the optimization more efficient and robust.
+	
+	\subfile{../Tikz/tikz_gradient_descent}
+	
+	\subsection{Advanced Topics in Neural Networks}
+	
+	\subsubsection{Deep Neural Networks}
+	A \emph{deep neural network} (DNN) [\autoref{fig:deep-nn}] is an artificial neural network characterized by multiple hidden layers between the input and output layers. The increased depth allows DNNs to model highly complex patterns and relationships in the data. Each layer in a DNN can be seen as learning a different level of abstraction, with the early layers capturing low-level features such as edges and textures in image data, while deeper layers capture high-level features like shapes and objects. This hierarchical learning capability makes DNNs extremely powerful for tasks such as image and speech recognition, natural language processing, and even playing strategic games. Training DNNs, however, requires large amounts of data and computational power, and often employs techniques such as dropout and batch normalization to improve performance and prevent overfitting.
+	
+	\subfile{../Tikz/tikz_multilayer_feedforward}
+	
+	\subsubsection{Convolutional Neural Networks}
+	A \emph{convolutional neural network} (CNN) [\autoref{fig:cnn}] is a specialized type of neural network designed for processing structured grid data, like images. CNNs use convolutional layers that apply a series of learnable filters to the input data to extract features. These filters slide over the input data, performing element-wise multiplications and summing the results, which helps in detecting patterns such as edges, textures, and shapes. Mathematically, the convolution operation for a single filter \(K\) applied to an input \(I\) can be expressed as:
+	
+	\[
+	S(i, j) = (I * K)(i, j) = \sum_{m} \sum_{n} I(i - m, j - n) K(m, n)
+	\]
+	
+	Convolutional layers are typically followed by pooling layers, which reduce the spatial dimensions of the data, and fully connected layers, which integrate the extracted features to make the final predictions. CNNs have revolutionized computer vision tasks, achieving state-of-the-art results in image classification, object detection, and segmentation. Advanced architectures like ResNet, Inception, and EfficientNet further enhance the capabilities of CNNs by introducing innovative design elements and optimization techniques.
+	
+	\subfile{../Tikz/tikz_convolutional_nn}
+	
+	\subsubsection{Recurrent Neural Networks}
+	A \emph{recurrent neural network} (RNN) [\autoref{fig:rnn}] is a type of neural network that is particularly well-suited for sequential data, such as time series or natural language. RNNs have connections that form directed cycles, allowing information to persist. This cyclic structure enables RNNs to maintain a hidden state that captures information from previous time steps, making them effective for tasks where the context is important, such as language modeling, machine translation, and speech recognition. The hidden state \(h_t\) at time step \(t\) is computed based on the input \(x_t\) and the previous hidden state \(h_{t-1}\):
+	
+	\[
+	h_t = \sigma(W_h h_{t-1} + W_x x_t + b)
+	\]
+	
+	where \(W_h\) and \(W_x\) are weight matrices, \(b\) is a bias vector, and \(\sigma\) is an activation function. Variants of RNNs, such as Long Short-Term Memory (LSTM) and Gated Recurrent Unit (GRU) networks, address some of the limitations of basic RNNs by introducing mechanisms to learn long-term dependencies and mitigate issues related to vanishing gradients.
+	
+	\subfile{../Tikz/tikz_recurrent_nn}
+	
+	\subsection{Graph Neural Networks and Attention Mechanisms}
+	
+	\subsubsection{Graph Neural Networks}
+	A \emph{graph neural network} (GNN) is an advanced type of neural network designed to handle graph-structured data, where relationships between data points are represented as edges between nodes. GNNs generalize neural networks to work directly on the graph domain by incorporating the graph's structure into the learning process. Nodes in a GNN aggregate feature information from their neighbors through multiple layers, enabling the network to capture the dependencies and relationships inherent in the graph. This message-passing mechanism [\autoref{fig:gnn}] allows GNNs to learn rich node representations and can be used for various tasks such as node classification, link prediction, and graph classification. The message-passing step for a node \(v\) can be mathematically expressed as:
+	
+	\[
+	h_v^{(k+1)} = \sigma \left( \sum_{u \in \mathcal{N}(v)} W h_u^{(k)} + b \right)
+	\]
+	
+	where \(h_v^{(k+1)}\) is the node feature vector at layer \(k+1\), \(\mathcal{N}(v)\) denotes the neighbors of node \(v\), \(W\) is a weight matrix, \(b\) is a bias vector, and \(\sigma\) is an activation function. Advanced GNN architectures, such as Graph Convolutional Networks (GCNs), Graph Attention Networks (GATs), and GraphSAGE, leverage different strategies for aggregating and updating node information, further enhancing their capabilities.
+	
+	\subfile{../Tikz/tikz_message_passing}
+	
+	\subsubsection{Attention Mechanisms}
+	Attention mechanisms are sophisticated techniques used to enhance the performance of neural networks by dynamically focusing on the most relevant parts of the input data while processing. The most prominent use of attention mechanisms is in the \emph{Transformer} model, which has revolutionized natural language processing tasks. The attention mechanism [\autoref{fig:attention}] computes a weighted sum of values, where the weights are derived from the compatibility of the query with the corresponding keys, allowing the model to selectively focus on important parts of the input. This selective focus helps improve the efficiency and accuracy of the model, especially in tasks involving sequences, such as machine translation and text summarization. The attention score for a query vector \(q\) and a set of key vectors \(\{k_1, k_2, \ldots, k_n\}\) is computed as:
+	
+	\[
+	\text{Attention}(q, K, V) = \text{softmax} \left( \frac{qK^T}{\sqrt{d_k}} \right) V
+	\]
+	
+	where \(K\) is the matrix of keys, \(V\) is the matrix of values, and \(d_k\) is the dimension of the keys. The combination of GNNs and attention mechanisms has shown significant promise in various applications, enabling models to effectively capture complex dependencies and relationships in the data. In particular, the integration of attention mechanisms into GNNs has led to the development of advanced models like the Graph Attention Network (GAT), which assigns different importance to different neighbors during the message-passing process, thereby improving the model's ability to learn from graph-structured data.
+	
+	\subfile{../Tikz/tikz_attention_mechanism}
+	
 \end{document}
