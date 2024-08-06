@@ -1,29 +1,56 @@
 \documentclass[../Thesis.tex]{subfiles}
 \begin{document}
-
-\section{Graph Similarity Problem}
-\label{sec:graph_similarity_problem}
-The \emph{graph similarity problem} involves determining the degree of similarity between two graphs. This problem has numerous applications in pattern recognition, computer vision, bioinformatics, and other fields. One common method to quantify graph similarity is through the \emph{graph edit distance} (GED).
-
-\subsection{Graph Edit Distance (GED)}
-The \emph{graph edit distance} between two graphs $G_1 = (V_1, E_1)$ and $G_2 = (V_2, E_2)$ is defined as the minimum cost required to transform $G_1$ into $G_2$ using a sequence of atomic operations. Formally, let $\Sigma$ be the set of all possible edit operations, and let $c: \Sigma \to \mathbb{R}^+$ be a cost function that assigns a positive real number to each operation. The GED is then given by:
-\[
-\text{GED}(G_1, G_2) = \min_{\sigma \in \Sigma^*} \sum_{o \in \sigma} c(o)
-\]
-where $\Sigma^*$ denotes the set of all finite sequences of operations from $\Sigma$, and $o$ represents an individual operation within a sequence $\sigma$.
-
-The computation of GED is known to be \textbf{NP-HARD}, indicating that finding the exact minimum edit distance between two graphs is computationally intensive.
-
-\subsection{Atomic Operations}
-The basic atomic operations typically includes:
-\begin{itemize}
-    \item \textbf{Vertex Insertion}: Inserting a new vertex $v$ into the graph.
-    \item \textbf{Vertex Deletion}: Deleting an existing vertex $v$ from the graph.
-    \item \textbf{Edge Insertion}: Inserting a new edge $e = \{u, v\}$ into the graph.
-    \item \textbf{Edge Deletion}: Deleting an existing edge $e = \{u, v\}$ from the graph.
-\end{itemize}
-To demonstrate the Graph Edit Distance (GED), consider pair of graphs represented in [\autoref{fig:ged-graphs}]:
-\subfile{../Tikz/tikz_atomic_operations}
-In this example, graph $G_1$ has vertex set $V_1 = \{A, B, C\}$ and edge set $E_1 = \{\{A, B\}, \{A, C\}, \{B, C\}\}$, while graph $G_2$ has vertex set $V_2 = \{A, B, C, D\}$ and edge set $E_2 = \{\{A, B\}, \{A, C\}, \{B, C\}, \{B, D\}\}$. The transformation (which cost is lowest) from $G_1$ to $G_2$ involves: Inserting the vertex $D$ and Inserting the edge $\{B, D\}$. If we assign a cost of 1 to each operation the total cost (GED) is: $1+1=2$.
-
+	
+	\section{Graph Similarity Problem}
+	\label{sec:graph_similarity_problem}
+	
+	The \emph{graph similarity problem} entails determining the degree of similarity or dissimilarity between two graphs. This problem has vast and varied applications across numerous domains, including pattern recognition, computer vision, bioinformatics, social network analysis, and chemical informatics. In these fields, comparing the structural properties of graphs can yield insights into patterns, relationships, and functional similarities between complex systems. For instance, in bioinformatics, comparing protein interaction networks can reveal functional similarities between different proteins, while in social network analysis, it can help identify similar community structures within different social groups. Due to its broad relevance, numerous methods have been developed to quantify graph similarity, each with its own strengths and limitations.
+	
+	\subsection{Graph Isomorphism}
+	Graph isomorphism is one of the fundamental concepts in graph theory used to determine if two graphs are structurally identical. Two graphs $G_1 = (V_1, E_1)$ and $G_2 = (V_2, E_2)$ are isomorphic if there is a bijection $f: V_1 \to V_2$ such that any two vertices $u$ and $v$ in $G_1$ are adjacent if and only if $f(u)$ and $f(v)$ are adjacent in $G_2$. Formally, $G_1$ and $G_2$ are isomorphic if:
+	\[
+	(u, v) \in E_1 \Leftrightarrow (f(u), f(v)) \in E_2
+	\]
+	While graph isomorphism provides a binary determination of whether two graphs are identical in structure, it is limited because it does not quantify the degree of similarity for non-isomorphic graphs. It is useful in applications where exact structural equivalence is necessary, such as in database indexing, chemical compound comparison, and verifying the correctness of network models. However, it is less useful in cases where graphs are similar but not identical, as it cannot measure partial similarity or small structural differences.
+	
+	\subsection{Graph Kernels}
+	Another sophisticated approach to measuring graph similarity involves the use of \emph{graph kernels}. Graph kernels provide a way to compute the similarity between two graphs based on their structural attributes and properties. They transform graphs into high-dimensional vectors and then compare these vectors using kernel functions. Common types of graph kernels include:
+	
+	\begin{itemize}
+		\item \textbf{Random Walk Kernels}: Measure similarity based on the number of matching random walks in both graphs.
+		\item \textbf{Shortest Path Kernels}: Compare graphs based on the distribution of shortest paths between pairs of nodes.
+		\item \textbf{Weisfeiler-Lehman Kernels}: Utilize an iterative node labeling algorithm to capture the neighborhood structure around each node.
+	\end{itemize}
+	
+	Graph kernels are powerful because they can incorporate various types of structural information and are well-suited for use in machine learning algorithms. They are particularly useful in applications like chemical compound classification, bioinformatics, and social network analysis. However, they can be computationally intensive and require careful tuning of parameters.
+	
+	\subsection{Graph Edit Distance (GED)}
+	The \emph{graph edit distance} (GED) is a more flexible and informative metric for measuring the similarity between two graphs, $G_1 = (V_1, E_1)$ and $G_2 = (V_2, E_2)$. It quantifies similarity by determining the minimum cost required to transform $G_1$ into $G_2$ using a series of atomic operations. These operations include vertex and edge insertions, deletions, and substitutions. The cost of each operation is determined by a predefined cost function.
+	
+	Formally, let $\Sigma$ be the set of all possible edit operations, and let $c: \Sigma \to \mathbb{R}^+$ be a cost function that assigns a positive real number to each operation. The GED is then given by:
+	\[
+	\text{GED}(G_1, G_2) = \min_{\sigma \in \Sigma^*} \sum_{o \in \sigma} c(o)
+	\]
+	where $\Sigma^*$ denotes the set of all finite sequences of operations from $\Sigma$, and $o$ represents an individual operation within a sequence $\sigma$.
+	
+	The computation of GED is known to be \textbf{NP-HARD}, which means finding the exact minimum edit distance between two graphs is computationally intensive. Despite this, GED is preferred over other similarity metrics due to its flexibility and ability to provide a nuanced measure of similarity even when the graphs are not identical. This makes it particularly useful in applications where exact matching is impractical or unnecessary, such as in approximate pattern matching in images or molecules.
+	
+	\subsubsection{Atomic Operations}
+	The basic atomic operations in GED typically include:
+	
+	\begin{itemize}
+		\item \textbf{Vertex Insertion}: Inserting a new vertex $v$ into the graph.
+		\item \textbf{Vertex Deletion}: Deleting an existing vertex $v$ from the graph.
+		\item \textbf{Vertex Substitution}: Replacing an existing vertex $v$ with another vertex $u$.
+		\item \textbf{Edge Insertion}: Inserting a new edge $e = \{u, v\}$ into the graph.
+		\item \textbf{Edge Deletion}: Deleting an existing edge $e = \{u, v\}$ from the graph.
+		\item \textbf{Edge Substitution}: Replacing an existing edge $e = \{u, v\}$ with another edge $e' = \{u', v'\}$.
+	\end{itemize}
+	
+	To illustrate the concept of Graph Edit Distance (GED), consider the pair of graphs represented in [\autoref{fig:ged-graphs}]:
+	\subfile{../Tikz/tikz_atomic_operations}
+	In this example, graph $G_1$ has a vertex set $V_1 = \{A, B, C\}$ and an edge set $E_1 = \{\{A, B\}, \{A, C\}, \{B, C\}\}$, while graph $G_2$ has a vertex set $V_2 = \{A, B, C, D\}$ and an edge set $E_2 = \{\{A, B\}, \{A, C\}, \{B, C\}, \{B, D\}\}$. The transformation with the lowest cost from $G_1$ to $G_2$ involves inserting the vertex $D$ and inserting the edge $\{B, D\}$. If we assign a cost of 1 to each operation, the total cost (GED) is: $1+1=2$.
+	
+	The GED's flexibility and detailed transformation cost make it a powerful tool for measuring graph similarity. While computationally intensive, it provides a meaningful and precise measure of similarity that can capture both small and large differences between graphs, making it highly valuable for applications where nuanced similarity measures are crucial.
+	
 \end{document}
