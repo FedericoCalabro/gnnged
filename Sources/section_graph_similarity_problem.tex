@@ -4,16 +4,22 @@
 	\section{Graph Similarity Problem}
 	\label{sec:graph_similarity_problem}
 	
-	The \emph{graph similarity problem} entails determining the degree of similarity or dissimilarity between two graphs. This problem has vast and varied applications across numerous domains, including pattern recognition, computer vision, bioinformatics, social network analysis, and chemical informatics. In these fields, comparing the structural properties of graphs can yield insights into patterns, relationships, and functional similarities between complex systems. For instance, in bioinformatics, comparing protein interaction networks can reveal functional similarities between different proteins, while in social network analysis, it can help identify similar community structures within different social groups. Due to its broad relevance, numerous methods have been developed to quantify graph similarity, each with its own strengths and limitations.
+	The \emph{graph similarity problem} entails determining the degree of similarity or dissimilarity between two graphs. This problem has vast and varied applications across numerous domains, including pattern recognition, computer vision, bioinformatics, social network analysis, and chemical informatics. In these fields, comparing the structural properties of graphs can yield insights into patterns, relationships, and functional similarities between complex systems. For instance, in bioinformatics, comparing protein interaction networks can reveal functional similarities between different proteins, while in social network analysis, it can help identify similar community structures within different social groups. Due to its broad relevance, numerous methods have been developed to quantify graph similarity, each with its own strengths and limitations. Additionally, it is often desirable to retrieve the edit path from one graph to another, alongside the similarity metric, to understand the specific transformations involved. However, we will focus solely on the similarity metrics and will not address the retrieval of edit paths.
+	
+	In the following sections, we will explore several key methods for measuring graph similarity: Graph Isomorphism, Graph Kernels, and Graph Edit Distance (GED). Each method will be discussed in terms of its fundamental concepts, applications, and limitations.
 	
 	\subsection{Graph Isomorphism}
+	
 	Graph isomorphism is one of the fundamental concepts in graph theory used to determine if two graphs are structurally identical. Two graphs $G_1 = (V_1, E_1)$ and $G_2 = (V_2, E_2)$ are isomorphic if there is a bijection $f: V_1 \to V_2$ such that any two vertices $u$ and $v$ in $G_1$ are adjacent if and only if $f(u)$ and $f(v)$ are adjacent in $G_2$. Formally, $G_1$ and $G_2$ are isomorphic if:
 	\[
 	(u, v) \in E_1 \Leftrightarrow (f(u), f(v)) \in E_2
 	\]
 	While graph isomorphism provides a binary determination of whether two graphs are identical in structure, it is limited because it does not quantify the degree of similarity for non-isomorphic graphs. It is useful in applications where exact structural equivalence is necessary, such as in database indexing, chemical compound comparison, and verifying the correctness of network models. However, it is less useful in cases where graphs are similar but not identical, as it cannot measure partial similarity or small structural differences.
+
+	\subfile{../Tikz/tikz_graph_isomorphism}
 	
 	\subsection{Graph Kernels}
+	
 	Another sophisticated approach to measuring graph similarity involves the use of \emph{graph kernels}. Graph kernels provide a way to compute the similarity between two graphs based on their structural attributes and properties. They transform graphs into high-dimensional vectors and then compare these vectors using kernel functions. Common types of graph kernels include:
 	
 	\begin{itemize}
@@ -24,7 +30,10 @@
 	
 	Graph kernels are powerful because they can incorporate various types of structural information and are well-suited for use in machine learning algorithms. They are particularly useful in applications like chemical compound classification, bioinformatics, and social network analysis. However, they can be computationally intensive and require careful tuning of parameters.
 	
+	\subfile{../Tikz/tikz_graph_kernels}
+	
 	\subsection{Graph Edit Distance (GED)}
+	
 	The \emph{graph edit distance} (GED) is a more flexible and informative metric for measuring the similarity between two graphs, $G_1 = (V_1, E_1)$ and $G_2 = (V_2, E_2)$. It quantifies similarity by determining the minimum cost required to transform $G_1$ into $G_2$ using a series of atomic operations. These operations include vertex and edge insertions, deletions, and substitutions. The cost of each operation is determined by a predefined cost function.
 	
 	Formally, let $\Sigma$ be the set of all possible edit operations, and let $c: \Sigma \to \mathbb{R}^+$ be a cost function that assigns a positive real number to each operation. The GED is then given by:
@@ -36,6 +45,7 @@
 	The computation of GED is known to be \textbf{NP-HARD}, which means finding the exact minimum edit distance between two graphs is computationally intensive. Despite this, GED is preferred over other similarity metrics due to its flexibility and ability to provide a nuanced measure of similarity even when the graphs are not identical. This makes it particularly useful in applications where exact matching is impractical or unnecessary, such as in approximate pattern matching in images or molecules.
 	
 	\subsubsection{Atomic Operations}
+	
 	The basic atomic operations in GED typically include:
 	
 	\begin{itemize}
