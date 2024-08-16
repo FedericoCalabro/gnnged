@@ -143,7 +143,17 @@
 		\label{fig:gedgnn_architecture}
 	\end{figure}
 	
-	\subsection{Problems and Gaps in Graph Edit Distance Research}
-	TODO
+	\subsection{Encountered Gaps}
+	
+	Despite the significant advancements in graph edit distance (GED) computation, several critical gaps remain unresolved, particularly in the practical implementation and evaluation of state-of-the-art models like GedGNN \cite{computing_graph_edit_distance_via_neural_graph_matching}. One of the foremost issues is the reproducibility of results, which is severely hindered by the lack of clear and well-defined parameters. Many papers, including those on GedGNN, often provide vague instructions that make it challenging for researchers to replicate experiments accurately. Key hyperparameters, such as learning rates, regularization factors, and specific model configurations, are frequently either omitted or insufficiently detailed, leading to difficulties in achieving the reported performance when models are re-implemented or tested in different environments.
+	
+	Another significant gap is the poor quality of the code provided by many research works. The codebases for models like GedGNN are often poorly documented, lacking clarity and organization. This makes the code difficult to read, understand, and extend, particularly for researchers who wish to build upon these models or adapt them to new tasks. Best practices in software development, such as modular code design, comprehensive comments, and adherence to coding standards, are frequently ignored. This not only hampers reproducibility but also stifles innovation by making it harder for others to modify or improve upon the existing work.
+	
+	Furthermore, there are considerable concerns about the fairness of model evaluations. Many studies, including those focusing on GedGNN, employ evaluation metrics that may not fully capture the model's true performance. For instance, evaluations often rely on benchmarks that may not be representative of real-world scenarios or fail to test the model's robustness across diverse graph types and sizes. This raises the question of whether the models are genuinely being tested for their effectiveness or if the evaluations are biased towards specific datasets or problem formulations that favor the proposed models. The reliance on narrow, predefined benchmarks can lead to inflated performance claims that do not generalize well to other, more varied graph datasets.
+	
+	Finally, the quality of the data used for training and evaluating GED models is another significant gap. Many existing datasets suffer from several limitations, including the use of approximate GED values instead of the true edit distance, which can introduce noise and inaccuracies into the model training process. Moreover, these datasets are often small and specialized, focusing on a single type of graph application, such as chemical compound graphs or social network graphs. Consequently, models trained on these datasets tend to perform poorly when applied to different types of graphs that were not represented in the training data. This lack of generalizability is a major barrier to the broader applicability of GED models, as it suggests that the current methods are overfitting to specific data characteristics rather than learning truly generalizable patterns.
+	
+	In summary, while models like GedGNN represent a step forward in GED computation, significant gaps remain that hinder their practical utility and broader adoption. These gaps include challenges with reproducibility due to unclear parameters, poor code quality, unfair model evaluations, and the use of low-quality, non-generalizable datasets. Addressing these issues is crucial for the continued advancement of the field and for ensuring that GED models can be reliably and effectively applied in diverse real-world scenarios.
+
 	
 \end{document}
