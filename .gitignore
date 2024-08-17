@@ -167,3 +167,5 @@ custom_dataset/mediumdense/**
 /cdatasets
 /datasets
 json_data/Medium
+json_data/1000g_50n
+json_data/1000g_100n
