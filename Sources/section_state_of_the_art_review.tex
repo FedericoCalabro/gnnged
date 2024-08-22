@@ -4,16 +4,16 @@
 	\section{State of the Art Review}
 	\label{sec:state_of_the_art_review}
 	
-	Traditional imperative solutions for solving the graph edit distance (GED) problem have been effective for graphs of modest size, utilizing explicit algorithms that compare graphs node by node and edge by edge through combinatorial techniques. However, as the number of nodes in the graph increases, the complexity of these methods grows exponentially, leading to significant scalability issues. In such scenarios, imperative solutions often become impractical, requiring an inordinate amount of time to compute the GED. This challenge is particularly critical in domains like bioinformatics, social network analysis, and cheminformatics, where large-scale graphs are common.
-	
-	To address these scalability challenges, recent research has pivoted towards leveraging artificial intelligence (AI) models. AI-based approaches offer more robust and scalable solutions by learning patterns and features from graph data, significantly reducing computation times and improving accuracy. This section reviews some of the prominent AI-based models that have advanced the state of the art in GED computation.
+	Calculating the GED with traditional imperative algorithm is possible but feasible for graphs of modest size. GED is a NP-HARD problems and for traditional solutions there is no way except to compare graphs node by node and edge by edge through combinatorial techniques to find a solution. However, as the number of nodes in the graphs increase, the complexity of these methods grows exponentially, leading to scalability issues thus infeasibility. To overcome these limitations recent works involve the use of artificial intelligence techniques such as neural networks to predict the GED between two graphs. AI-based approaches usually offer more robust and scalable solutions by learning patterns and features from graphs, significantly reducing computation times. This section reviews some of the most important papers dealing with GED calculation from 2019 to the time of writing this (2024).
 
-	The timeline of notable advancements in this field starts with \textit{SimGNN} in 2019 \cite{simgnn__a_neural_network_approach_to_fast_graph_similarity_computation}, the first approach to utilize neural networks for computing GED. Subsequent models have built upon this foundation, progressively enhancing the accuracy and efficiency of GED computation. This review covers developments from SimGNN to the latest contributions in 2023, culminating in the VLDB paper introducing \textit{GedGNN} \cite{computing_graph_edit_distance_via_neural_graph_matching}. These models collectively represent significant strides in utilizing AI to overcome the limitations of traditional GED computation methods.
+	The timeline we are going to explore starts with \textit{SimGNN} in 2019 \cite{simgnn__a_neural_network_approach_to_fast_graph_similarity_computation}, the first prominent approach to utilize neural networks for computing GED. 
+	After that many other models have been built mostly on SimGNN's foundation each time trying to perform a little better.
+	Finally the timeline ends with most recent and promising work introducing \textit{GedGNN} \cite{computing_graph_edit_distance_via_neural_graph_matching}. All these models try to effectively predict the GED between two graphs, but as we will see, everything seems still to be in early stage of development.
 	
 	\subsection{Timeline}
 	\label{subsec:timeline}
 	
-	2019, \textit{SimGNN: A Neural Network Approach to Fast Graph Similarity Computation} \cite{simgnn__a_neural_network_approach_to_fast_graph_similarity_computation}: Introduces SimGNN, addressing graph similarity computation using neural networks. It features a learnable embedding function, an attention mechanism to emphasize important nodes, and a pairwise node comparison method, achieving better generalization and computational efficiency compared to baselines.
+	2019, \textit{SimGNN: A Neural Network Approach to Fast Graph Similarity Computation} \cite{simgnn__a_neural_network_approach_to_fast_graph_similarity_computation}: Introduces SimGNN, addressing graph similarity computation using neural networks. It features a learnable embedding function, an attention mechanism to focus on important nodes, and a pairwise node comparison method, achieving better generalization and computational efficiency compared to baselines.
 	
 	2020, \textit{Learning Graph Edit Distance by Graph Neural Networks} \cite{learning_graph_edit_distance_by_graph_neural_networks}: Introduces a framework combining deep metric learning with traditional approximations of graph edit distance using geometric deep learning. The approach employs a message passing neural network (MPNN) to capture graph structure and compute graph distances efficiently, showing superior performance in graph retrieval and competitive results in graph similarity learning.
 	
@@ -52,24 +52,24 @@
 	
 	\subsection{SimGNN}
 	
-	The first innovative model that significantly outperformed the competition is SimGNN \cite{simgnn__a_neural_network_approach_to_fast_graph_similarity_computation}, introduced in 2019. SimGNN serves as a foundational model in the field of graph similarity computation, and subsequent models often inherit its core concepts, making it the starting point of reference for anyone working in this niche field.
+	The first innovative model that used neural networks is SimGNN \cite{simgnn__a_neural_network_approach_to_fast_graph_similarity_computation}, introduced in 2019. SimGNN serves as a foundational model in the field of graph similarity computation, in fact future models will often inherit its core concepts (such as the siamese layout architecture), making it the starting point of reference for anyone dealing with GED computation. 
 	
-	SimGNN is an end-to-end neural network-based approach designed to learn a function that maps a pair of graphs to a similarity score. An overview of SimGNN is illustrated in \autoref{fig:simgnn_architecture}. The architecture of SimGNN involves several key stages:
-	
-	\begin{itemize}
-		\item \textbf{Node Embedding Stage}: Each node in the graph is transformed into a vector that encodes its features and structural properties. This stage leverages a graph convolutional network to capture local structural information.
-		\item \textbf{Graph-Level Embedding Stage}: The node embeddings are aggregated using an attention mechanism to produce a single embedding for each graph. The attention mechanism helps to emphasize more important nodes, improving the overall representation of the graph.
-		\item \textbf{Graph-Graph Interaction Stage}: The graph-level embeddings of the two graphs are interacted to produce interaction scores that represent the similarity between the graphs. This interaction is performed through a neural network that learns the relationship between the embeddings.
-		\item \textbf{Final Similarity Score Computation Stage}: The interaction scores are further processed to compute the final similarity score, which is compared against the ground-truth similarity score for parameter updates.
-	\end{itemize}
-	
-	In addition to the graph-level embedding interaction strategy, SimGNN incorporates a pairwise node comparison strategy:
+	The architecture of SimGNN [\autoref{fig:simgnn_architecture}] is composed by several stages:
 	
 	\begin{itemize}
-		\item \textbf{Pairwise Node Comparison}: This strategy involves computing pairwise interaction scores between the node embeddings of the two graphs. For graphs of different sizes, fake nodes with zero embeddings are added to the smaller graph to ensure compatibility. The resulting similarity matrix is used to extract histogram features, which are then combined with graph-level interaction scores to provide a comprehensive view of graph similarity.
+		\item \textbf{Node Embedding Stage}: This stage makes use of a graph convolutional network to capture local structural information that transforms each node in the graph into a vector that encodes its features and structural properties.
+		\item \textbf{Graph-Level Embedding Stage}: This stage produces a single embedding representing the whole graphs starting from the previously produced nodes embeddings by also using attention mechanisms to focus on important nodes.
+		\item \textbf{Graph-Graph Interaction Stage}: This stage puts in communication the two graphs embedding previously produced and produces a matrix of similarity interaction scores.
+		\item \textbf{Final Similarity Score Computation Stage}: This stage process the previously produced similarity matrix to compute the final similarity score.
 	\end{itemize}
 	
-	The combination of these two strategies allows SimGNN to capture both coarse global comparison information and fine-grained node-level comparison information, resulting in a robust and thorough approach to graph similarity computation.
+	In addition to the graph-level embedding interaction strategy, SimGNN has a its disposal a pairwise node comparison strategy:
+	
+	\begin{itemize}
+		\item \textbf{Pairwise Node Comparison}: This strategy involves computing pairwise interaction scores between the node embeddings of the two graphs. The resulting similarity matrix is used to extract histogram features, which are then combined with the graph-level interaction scores to provide a comprehensive view of graph similarity.
+	\end{itemize}
+	
+	The combination of these two strategies should allow the model to capture both global and local informations which should result in a robust approach to graph similarity computation.
 	
 	\begin{figure}[H]
 		\centering
@@ -81,17 +81,18 @@
 	
 	\subsection{GPN}
 	
-	The Graph Path Networks (GPN) model, proposed in 2022 within the \textit{NOAH Framework} \cite{noah__neural_optimized_a*_search_algorithm_for_graph_edit_distance_computation}, introduces a novel approach to computing approximate Graph Edit Distance (GED) by leveraging the A* search algorithm optimized through neural networks. This method addresses several limitations found in previous models, including SimGNN, by improving both the search direction and search space optimization.
+	In 2022, an innovative hybrid approach for computing GED was released.
+	The Graph Path Networks (GPN) model, proposed within the \textit{NOAH Framework} \cite{noah__neural_optimized_a*_search_algorithm_for_graph_edit_distance_computation}, introduces the GED computation by exploiting the A* search algorithm optimized through neural networks. This method tries to address several previously found limitations trying to improve both the search direction and search space optimization.
 	
-	An overview of GPN is illustrated in \autoref{fig:gpn_architecture}. The architecture of GPN comprises several key components:
+	The architecture of GPN [\autoref{fig:gpn_architecture}] is composed by several modules:
 	
 	\begin{itemize}
-		\item \textbf{Pre-training Module}: This module computes pre-training information such as exact GEDs and graph edit paths. It generates (sub)graph pairs used in training, enriching the model's understanding of graph transformations.
-		\item \textbf{Graph Embedding Module}: Utilizing the Graph Isomorphism Network (GIN), this module transforms each node into a vector encoding its features and structural properties. It incorporates cross-graph information and employs an attention mechanism to obtain the final graph-level embeddings.
-		\item \textbf{Learning Module}: This component focuses on optimizing the A* search algorithm by learning an estimated cost function and an elastic beam size. The estimated cost function helps guide the search direction, while the beam size adapts to various user settings, improving the search space optimization.
+		\item \textbf{Pre-training Module}: This module computes pre-training information about the graphs that will be exploited by the next modules.
+		\item \textbf{Graph Embedding Module}: This module utilizes layers of Graph Isomorphism Network (GIN) to transform each node into a vector. Then these embeddings are combined into a single graph level embedding by using different attention mechanisms.
+		\item \textbf{Learning Module}: This module focuses on optimizing the A* search algorithm by learning an estimated cost function and an elastic beam size. The tradition algorithm is then used for the final prediction.
 	\end{itemize}
 	
-	GPN’s enhancements over SimGNN include improved search efficiency and accuracy in GED computation. It also facilitates tasks such as graph similarity search and graph classification, demonstrating its versatility and robustness. Notably, GPN is capable of finding an edit path between graphs, utilizing a combination of pre-training information and adaptive search strategies to achieve high performance across different datasets.
+	The main advantage of GPN over SimGNN is that it is capable of finding an edit path between graphs (roughly accurate) between graphs in a short amount of time.
 	
 	\begin{figure}[H]
 		\centering
@@ -103,17 +104,16 @@
 	
 	\subsection{TaGSim}
 	
-	TaGSim (Type-aware Graph Similarity) \cite{TaGSim_type_aware_graph_similarity_learning_and_computation}, introduced in 2022, represents a significant advancement in the computation of Graph Edit Distance (GED) by addressing the limitations of previous approaches, including those that treat GED as a single global measure. TaGSim refines GED computation by considering the distinct impacts of various types of graph edit operations.
+	In 2022, another innovative approach was released with TaGSim (Type-aware Graph Similarity) \cite{TaGSim_type_aware_graph_similarity_learning_and_computation}. The idea behind GED as a single value has been revaluated and it is now thought as the summation of three different values: $ged\_nc$ the number of node relabelling, $ged\_in$ the number of node insertions/deletions, $ged\_ie$ the number of edges insertions/deletions. 
 	
-	An overview of TaGSim is illustrated in \autoref{fig:tagsim_architecture}. The TaGSim framework operates through the following key components:
+	The architecture of TaGSim [\autoref{fig:tagsim_architecture}] is composed by several components:
 	
 	\begin{itemize}
-		\item \textbf{Type-Aware Graph Embeddings}: TaGSim models the transformative impacts of four specific graph edit operations—node insertion/deletion (NR), node relabeling (NID), edge insertion/deletion (ER), and edge relabeling (EID). Each type of operation is handled separately to capture its localized effects on the graph.
-		\item \textbf{Graph Edit Value (GEV) Dimensions}: GED is decoupled into four dimensions corresponding to the different types of graph edits. TaGSim estimates each dimension individually, providing a more granular and accurate representation of graph similarity.
-		\item \textbf{Type-Aware Neural Networks}: The framework uses neural networks that are specifically designed to process and learn from the type-aware embeddings. This allows TaGSim to achieve high accuracy in GED estimation by incorporating the distinct impacts of different edit types.
+		\item \textbf{Type-Aware Graph Embeddings}: This component takes into account the different impacts that different atomic operations could have when predicting the GED producing a type-aware graph level embedding. Namely the operations taken into accounts are: node insertion/deletion (NR), node relabeling (NID), edge insertion/deletion (ER), and edge relabeling (EID). Each type of operation is handled separately to capture its localized effects on the graph.
+		\item \textbf{Type-Aware Neural Networks}: This component takes advantage of specific neural networks that are specifically designed to process and learn from the type-aware embeddings. This allows TaGSim to achieve high accuracy in GED estimation by incorporating the distinct impacts of different edit types and outputs them all.
 	\end{itemize}
 	
-	TaGSim’s approach offers several advantages over traditional GED computation methods and previous AI-based models. By decoupling the GED into different dimensions, it avoids the pitfalls of treating GED as a single undifferentiated metric. This granularity enhances both the accuracy and interpretability of the similarity scores, making TaGSim a robust solution for various graph analysis tasks.
+	The main advantage of TaGSim over predecessors is that by decoupling the GED into different dimensions, there is the potential for more granular control and learnability.
 	
 	\begin{figure}[H]
 		\centering
@@ -124,17 +124,17 @@
 
 	\subsection{GedGNN}
 	
-	GedGNN (Graph Edit Distance via Neural Graph Matching) \cite{computing_graph_edit_distance_via_neural_graph_matching}, introduced in 2023, represents the latest advancement in the field of Graph Edit Distance (GED) computation. This model addresses the challenge of capturing both node and edge matching effectively through a sophisticated neural network architecture.
+	In 2023, the model that is considered the state of the art at the time of writing this (2024) is released with GedGNN (Graph Edit Distance via Neural Graph Matching) \cite{computing_graph_edit_distance_via_neural_graph_matching}. The idea behind this model is to try to put together all the best ideas from past's models including the basic siamese layout of SimGNN, the use of more advanced convolutional layers of GPN and the split of the GED metric from TaGSim while still allowing for the retrieval of an edit paths by taking inspiration from NOAH framework.
 	
-	An overview of GedGNN is illustrated in \autoref{fig:gedgnn_architecture}. The GedGNN architecture comprises several innovative components:
+	The architecture of GedGNN [\autoref{fig:gedgnn_architecture}] is composed by several components:
 	
 	\begin{itemize}
-		\item \textbf{Graph Neural Network (GNN) Encoder}: This component uses a GNN to encode the structural and attribute information of the input graphs. The encoder generates embeddings for nodes and edges, preserving their relational information.
-		\item \textbf{Node and Edge Matching Module}: This module performs node and edge matching between the two graphs. It uses an iterative matching algorithm to refine the matches, improving accuracy over multiple iterations.
-		\item \textbf{k-Best Matching Post-Processing Algorithm}: To further enhance the matching accuracy, GedGNN incorporates a k-best matching algorithm. This algorithm selects the best k matching solutions from the initial matches, refining the final GED computation.
+		\item \textbf{Graph Neural Network (GNN) Encoder}: This component produces the encodings for nodes and edges while preserving their relational information. This is done through the employment of an advanced GNN encoder.
+		\item \textbf{Node and Edge Matching Module}: This component performs the node and edge matching between the pair of graphs producing a matching matrix and a cost matrix.
+		\item \textbf{k-Best Matching Post-Processing Algorithm}: After predicting the GED value a k-best post-processing algorithm is used trying to retrieve a good edit path.
 	\end{itemize}
 	
-	GedGNN’s comprehensive approach ensures high accuracy in GED estimation by combining robust embedding techniques with advanced matching algorithms. This model not only outperforms previous methods but also provides a flexible framework that can adapt to various types of graph structures and similarity measures.
+	GedGNN's results state to not only outperforms previous methods but also provides a flexible framework that can adapt to various types of graph structures and similarity measures.
 	
 	\begin{figure}[H]
 		\centering
@@ -145,18 +145,18 @@
 	
 	\subsection{Encountered Gaps}
 	
-	In working with the codebase provided in the paper presenting GedGNN, several critical gaps have become evident, extending beyond just the implementation of GedGNN to also include other models such as TaGSim, SimGNN, and GPN. These gaps significantly hinder both the usability of the code and the reliability of the results obtained from these models. A primary issue is the lack of clear and well-defined parameters, which severely impacts the reproducibility of results. Instructions regarding key hyperparameters, such as learning rates, regularization factors, and model configurations, are often vague, poorly documented, or entirely omitted. This makes it challenging to replicate experiments accurately and to achieve the reported performance across different environments.
+	When studying GedGNN's \href{https://github.com/ChengzhiPiao/GEDGNN}{codebase} a lot of problems and concerns have become evident. Perhaps most of these gaps are due to the intrinsic nature of copy pasting from paper to paper over time and to the lack of researcher's ability to extensively testing theyr work.
 	
-	The quality of the codebase itself presents another significant challenge. The overall code is poorly documented, lacking the necessary clarity and organization that would make it easier to read, understand, and refactor. This lack of structure is evident across the different models included in the codebase, making attempts to extend or modify the code particularly difficult. The absence of best practices in software development, such as modular design and comprehensive commenting, further complicates efforts to ensure that modifications do not introduce new issues or degrade performance.
+	A primary issue is the quality of the codebase itself, there is a lack of standardization and employments of best practices, lots of similar methods that all seem to do the same thing, lots of classes, lots of confusion, lots of unhandled errors. Code almost seem hardcoded here and there, not allowing for customization and manipulation. The code is not easy to read and the documentation, although written, is very poor.
 	
-	Scalability is another area where the codebase falls short. Although the code is designed to run on GPUs, it does not scale well, failing to deliver the significant speedups that one might expect, especially for large-scale problems. This inefficiency severely limits the practical application of these models, particularly in scenarios where computational efficiency and the ability to handle larger graphs are crucial. Additionally, the training and testing procedures are generally restricted to graphs with fewer than 10 nodes, which is a major limitation. This restriction prevents the models from learning and scaling effectively when applied to larger and more complex graphs, which are common in real-world applications.
+	Strictly correlated to code quality and testing scenarios is the scalability issues on GPUs. When trying to run for the first time the code as is on a GPU some errors also raised up, but apart from this, the models do not scale well on GPU hardware and this is an issue. Training on small datasets is feasible on CPUs but as soon as a bigger dataset are used for test-training new models, problems have become evident with long training times per epoch.
 	
-	Another critical concern is the fairness of the model evaluations. The benchmarks used in evaluating these models may not fully capture their true performance, as they often do not represent real-world scenarios or test the robustness of the models across diverse graph types and sizes. This raises questions about whether the models are genuinely being tested for their effectiveness or if the evaluations are biased towards specific datasets or problem formulations that favor the models under consideration. Such limitations can lead to inflated performance claims that do not generalize well to other, more varied graph datasets.
+	It is not clear why the codebase as is does restrict the usage of graphs for those with only 10 nodes or less in both training, testing and validation scenarios. Perhaps due to the presence of many imperative algorithm with high computational time such as the k-best post processing algorithm that retrieves edit paths; also code as is does break (at least for me) when testing on the IMDB dataset (with any model). Additionally, there is no use of artificial dataset generation, despite being present in the code, creating more confusion and several if statements that will never be reached.
 	
-	Lastly, the quality of the data used for training and evaluating these models is problematic. The datasets employed often contain approximate GED values rather than the true edit distances, introducing inaccuracies that can mislead the training process. Moreover, these datasets are typically small and specialized, focusing on a single type of graph application, such as chemical compounds or social networks. Consequently, the models tend to perform poorly when applied to different types of graphs that were not represented in the training data, indicating a lack of generalizability.
+	Data used for training is also an issue persisting from SimGNN's times. Datasets used are always the same but the issue (which is not an issue but rather a constructive critic), is that approximate GEDs are used as labels instead of real ones. Datasets are mostly small (with graphs with less than 10 nodes in general) and with modern hardware GED wouldn't take much time to compute exactly. Also, in almost any codebase seen till date, training is structured in such a way that for each pair of graph present in the training set the corresponding GED is required.
 	
-	In summary, the codebase for the paper presenting GedGNN and related models such as TaGSim, SimGNN, and GPN presents several significant challenges that hinder their practical utility and broader adoption. These include issues with reproducibility due to unclear parameters, poor code quality that complicates refactoring and extension, limited scalability, unfair model evaluations, and reliance on low-quality, non-generalizable datasets. Additionally, the restriction to small graphs further limits the learning capacity and scalability of these models. Addressing these issues is crucial for advancing the field and ensuring that GED models can be reliably and effectively applied in diverse real-world scenarios.
-
-
+	But the most important thing that has been shown up is that testing has not been performed in a fair way. It is not clear why, but when dealing with the codebase as is, it is not possible to test a model that has been trained on a specific dataset on a different dataset. Perhaps to not show the evident lack of generalization emersed after doing modifications to the code to perform fair testing [\autoref{sec:methodology_and_experimentation}].
+	
+	In summary, the analysed codebase which presents GedGNN, TaGSim, SimGNN and GPN presents several significant challenges to overcome. These include problems with the reproducibility of the results, fair evaluations, scalability issues, poor code quality, unclear parameters and more. Clearly, resolving many of this issues would lead to a significant advancement in this field.
 	
 \end{document}
