@@ -51,6 +51,7 @@
 	2023, \textit{Computing Graph Edit Distance via Neural Graph Matching} \cite{computing_graph_edit_distance_via_neural_graph_matching}: Introduces GEDGNN, a deep learning framework for computing GED by focusing on graph conversion rather than GED value prediction alone. GEDGNN predicts GED values and a matching matrix, followed by a post-processing algorithm for extracting high-quality node matchings.
 	
 	\subsection{SimGNN}
+	\label{sec:simgnn}
 	
 	The first innovative model that used neural networks is SimGNN \cite{simgnn__a_neural_network_approach_to_fast_graph_similarity_computation}, introduced in 2019. SimGNN serves as a foundational model in the field of graph similarity computation, in fact future models will often inherit its core concepts (such as the siamese layout architecture), making it the starting point of reference for anyone dealing with GED computation. 
 	
@@ -80,6 +81,7 @@
 
 	
 	\subsection{GPN}
+	\label{sec:gpn}
 	
 	In 2022, an innovative hybrid approach for computing GED was released.
 	The Graph Path Networks (GPN) model, proposed within the \textit{NOAH Framework} \cite{noah__neural_optimized_a*_search_algorithm_for_graph_edit_distance_computation}, introduces the GED computation by exploiting the A* search algorithm optimized through neural networks. This method tries to address several previously found limitations trying to improve both the search direction and search space optimization.
@@ -103,6 +105,7 @@
 	
 	
 	\subsection{TaGSim}
+	\label{sec:tagsim}
 	
 	In 2022, another innovative approach was released with TaGSim (Type-aware Graph Similarity) \cite{TaGSim_type_aware_graph_similarity_learning_and_computation}. The idea behind GED as a single value has been revaluated and it is now thought as the summation of three different values: $ged\_nc$ the number of node relabelling, $ged\_in$ the number of node insertions/deletions, $ged\_ie$ the number of edges insertions/deletions. 
 	
@@ -123,6 +126,7 @@
 	\end{figure}
 
 	\subsection{GedGNN}
+	\label{sec:gedgnn}
 	
 	In 2023, the model that is considered the state of the art at the time of writing this (2024) is released with GedGNN (Graph Edit Distance via Neural Graph Matching) \cite{computing_graph_edit_distance_via_neural_graph_matching}. The idea behind this model is to try to put together all the best ideas from past's models including the basic siamese layout of SimGNN, the use of more advanced convolutional layers of GPN and the split of the GED metric from TaGSim while still allowing for the retrieval of an edit paths by taking inspiration from NOAH framework.
 	

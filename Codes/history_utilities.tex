@@ -1,0 +1,63 @@
+\begin{lstlisting}[label={code:history_utilities}, caption={History Utilities}]
+class HistoryUtilities():
+	"""HistoryUtilities is responsible for providing common history utilities functions."""
+	def build_ged_combination(self, history : History) -> List[MappingGed]:
+		"""Function that builds the ged pickle file from the combination of every pair of graphs in history"""
+		mapping_list = []
+		entries = list(history.items())
+		all_combs = list(combinations(entries, 2))
+		for comb in tqdm(all_combs, total=len(all_combs), desc="Ged Dict Generation"):
+			id1, id2 = comb[0][0], comb[1][0]
+			value = self.calculate_ged_comb(history, id1, id2)
+			mapping_list.append(value)
+		return mapping_list
+	
+	def calculate_ged_comb(self, history : History, id1 : HistoryKey, id2: HistoryKey) -> MappingGed:
+		"""Returns the artificial ged distance given an entry combination"""
+		delimiters = [id1, id2]
+		delimiters.sort()
+		min, max = delimiters[0], delimiters[1]
+		ged = ged_nc = ged_in = ged_ie = 0
+		for entry in history.items():
+			key = entry[0]
+			value = entry[1]
+			if min < key <= max:
+				TaGED = value[1]
+				ged += TaGED[0]
+				ged_nc += TaGED[1]
+				ged_in += TaGED[2]
+				ged_ie += TaGED[3]
+			if key > max:
+				break
+		return (id1, id2, ged, ged_nc, ged_in, ged_ie, [])
+	
+	def split_by_fractions(self, history: History, train=0.8, test=0.2):
+		"""Split history in two dicts according to proportions"""
+		assert train+test==1.0, 'fractions sum is not 1.0'
+		keys = list(history.keys())
+		shuffle(keys)
+		split_point = int(train * len(keys))
+		dict_train = {key: history[key] for key in keys[:split_point]}
+		dict_test = {key: history[key] for key in keys[split_point:]}
+		return dict_train, dict_test
+	
+	
+	def save_to_sparse_jsons(self, history : History, outfolder : str):
+		"""Create/Clean outfolder than save all history as jsons files"""
+		if not os.path.exists(outfolder):
+			os.makedirs(outfolder)
+		file_list = os.listdir(outfolder)
+		jsons_files = [file for file in file_list if file.endswith('.json')]
+		for file in jsons_files:
+			file_path = os.path.join(outfolder, file)
+			os.remove(file_path)
+		for key, value in tqdm(history.items(), total=len(history.items()), desc=f"Saving to {outfolder}"):
+			filename = os.path.join(outfolder, f'{key}.json')
+			with open(filename, 'w') as f:
+				graph = {}
+				graph['n'] = value[0].number_of_nodes()
+				graph['m'] = value[0].number_of_edges()
+				graph['labels'] = None
+				graph['graph'] = list(list(map(lambda t: list(t), value[0].edges)))
+				json.dump(graph, f)	
+\end{lstlisting}

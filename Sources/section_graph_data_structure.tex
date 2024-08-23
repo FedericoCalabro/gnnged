@@ -4,87 +4,88 @@
 	\section{Graph Data Structure}
 	\label{sec:graph_data_structure}
 	
-	A \emph{graph} $G$ [\autoref{fig:example-graph}] is a non-linear data structure consisting of vertices and edges. The vertices are sometimes also referred to as nodes and the edges are arcs that connect any two nodes in the graph. Graphs are used to represent relationships between different entities and have applications in many fields including Computer Science, Physics, Biology, Chemistry, Optimization Theory, Social Sciences, and many more. They are fundamental in modeling networks such as social networks, communication networks, biological networks, and transportation systems, making them indispensable tools for analyzing and solving complex problems. In everyday tasks, graphs can represent relationships in recommendation systems, routing algorithms in GPS navigation, workflow optimization, and resource allocation in various industries.
+	A \emph{graph} $G$ [\autoref{fig:example-graph}] is a nonlinear data structure consisting of a set of vertices and arcs, where arcs connect pairs of vertices in the set. Graphs are widely used to represent relationships between entities and play a significant role in the development of fields like Computer Science, Optimization, Chemistry and others. They are a pillar in network-based systems modeling such as social media, biological networks, and transportation systems, being a crucial tool for analyzing and solving complex problems. Use cases of graphs can be found in the actual world, for example in recommendation systems, routing and navigation algorithms like GPS, optimization problems and resource allocation (also known as transportation problems).
 	
 	\subfile{../Tikz/tikz_graph_example}
 	
-	A graph is formally defined as a tuple $G = (V, E)$, where:
+	A graph can be formally defined as a tuple $G = (V, E)$, where:
 	\begin{itemize}
-		\item $V$ is a finite set of vertices (or nodes). Each vertex represents an entity or a data point, and the set of vertices $V$ is often denoted as $V = \{v_1, v_2, \ldots, v_n\}$ where $n$ is the number of vertices.
-		\item $E$ is a set of edges, where each edge is an unordered pair of distinct vertices from $V$. Thus, $E \subseteq \{\{u, v\} \mid u, v \in V \text{ and } u \neq v\}$. Each edge signifies a relationship or connection between the pair of vertices it links.
+		\item $V$ is a finite set of vertices where each represents an entity or a data point. The set $V$ is often denoted as $V = \{v_1, v_2, \ldots, v_n\}$ where $n$ is the number of vertices.
+		\item $E$ is a set of edges, where each edge is an unordered pair of distinct vertices from $V$. Thus, $E \subseteq \{\{u, v\} \mid u, v \in V \text{ and } u \neq v\}$. Edges represents the existing relationship between two vertices in the set.
 	\end{itemize}
 	
-	For instance The graph depicted in \autoref{fig:example-graph} can be formally defined as a tuple \( G = (V, E) \), where:
+	For instance, graph depicted in \autoref{fig:example-graph} can be formally defined as a tuple \( G = (V, E) \), where:
 	\begin{itemize}
 		\item \( V \) is the set of vertices, \( V = \{A, B, C, D\} \)
 		\item \( E \) is the set of edges, \( E = \{(A, B), (A, C), (B, C), (B, D)\} \)
 	\end{itemize}
 	
 	\subsection{Types of Graphs}
-	Graphs can be classified into various types based on their properties, including:
+	There exist different categories of graphs depending on their properties, including:
 	
 	\begin{itemize}
-		\item \textbf{Directed Graph} [\autoref{fig:directed-graph}]: A directed graph (or digraph) is a graph in which every edge has a direction, represented as an ordered pair \( (u, v) \) where \( u, v \in V \) and \( u \neq v \). It is used in various applications such as web page ranking, where links from one page to another have a specific direction, and citation networks, where one paper cites another.
+		\item \textbf{Directed Graph} [\autoref{fig:directed-graph}]: also known as digraph, is the case where the direction is indicated on the edges, representing \( G \) as an ordered pair \( (u, v) \) where \( u, v \in V \) and \( u \neq v \). It's applied in a range of areas, including web page ranking, where links between pages have a set direction, and citation networks, where one paper references another.
 		\subfile{../Tikz/tikz_directed_graph}
 		
-		\item \textbf{Undirected Graph} [\autoref{fig:undirected-graph}]: An undirected graph is a graph in which the edges do not have a direction, represented as an unordered pair \( \{u, v\} \) where \( u, v \in V \) and \( u \neq v \). This type of graph is commonly used to model social networks where the connections (friendships) are mutual, indicating that if one person is friends with another, the reverse is also true.
+		\item \textbf{Undirected Graph} [\autoref{fig:undirected-graph}]: the edges do not have a direction, represented as an unordered pair \( \{u, v\} \) where \( u, v \in V \) and \( u \neq v \). This kind of graph is commonly used to model networks where the connections of two nodes are mutual, indicating that relationship is valid in both senses.
 		\subfile{../Tikz/tikz_undirected_graph}
 		
-		\item \textbf{Weighted Graph} [\autoref{fig:weighted-graph}]: A weighted graph is a graph in which each edge has an associated weight or cost, represented as a function \( w: E \to \mathbb{R} \) where \( w(e) \) is the weight of edge \( e \in E \). This is particularly useful in transportation networks where the weights can represent distances, travel times, or costs associated with traveling between locations.
+		\item \textbf{Weighted Graph} [\autoref{fig:weighted-graph}]: in this graph edges have a weight (or cost) related, represented as a function \( w: E \to \mathbb{R} \) where \( w(e) \) is the weight of edge \( e \in E \). This is particularly useful in transportation networks where the weights can express distances, the time spent traveling from one point to another, or costs associated with the displacement.
 		\subfile{../Tikz/tikz_weighted_graph}
 		
-		\item \textbf{Simple Graph} [\autoref{fig:simple-graph}]: A simple graph is a graph that has no loops (edges connecting a vertex to itself) and no multiple edges (more than one edge connecting the same pair of vertices). Simple graphs are the most basic type of graph, with straightforward structures that make them easy to analyze. They are used in many basic network models to simplify the analysis and understand the fundamental properties of the network.
+		\item \textbf{Simple Graph} [\autoref{fig:simple-graph}]: is a graph without loops (there doesn't exist a path from a vertex to itself) and has no multiple edges (the same pair of vertices is not connected more than once). Simple graphs are the most basic type of graph existing, with straightforward structures that make them easy to handle. They are often used for modeling basic networks to maintain a clear design and facilitate the analysis of the structure and the understanding of network properties. 
 		\subfile{../Tikz/tikz_simple_graph}
 		
-		\item \textbf{Complete Graph} [\autoref{fig:complete-graph}]: A complete graph is a graph in which there is exactly one edge between each pair of distinct vertices. Formally, a complete graph on \( n \) vertices, denoted as \( K_n \), has \( E = \{ \{u, v\} \mid u, v \in V, u \neq v \} \). Complete graphs are used in scenarios where maximum connectivity is required, such as in certain network topologies and in combinatorial optimization problems.
+		\item \textbf{Complete Graph} [\autoref{fig:complete-graph}]: is a graph in which every vertex is connected with all the other vertices in the set. Formally, a complete graph on \( n \) vertices, denoted as \( K_n \), has \( E = \{ \{u, v\} \mid u, v \in V, u \neq v \} \). They are widely used in cases where is necessary maximum connectivity, such as some network topologies and combinatorial optimization problems.
 		\subfile{../Tikz/tikz_complete_graph}
 		
-		\item \textbf{Bipartite Graph} [\autoref{fig:bipartite-graph}]: A bipartite graph is a graph whose vertices can be divided into two disjoint sets \( U \) and \( W \) such that every edge connects a vertex in \( U \) to a vertex in \( W \). Bipartite graphs are used to model relationships between two different classes of objects. For example, in job assignments, vertices in \( U \) can represent jobs, and vertices in \( W \) can represent workers, with edges indicating which workers are assigned to which jobs.
+		\item \textbf{Bipartite Graph} [\autoref{fig:bipartite-graph}]: a graph whose vertices are separable into two disjoint sets \( U \) and \( W \) in a way that an edge only connects a vertex from \( U \) with a vertex from \( W \). Bipartite graphs are useful for modeling relationships between objects from two different classes. For example, in the context of job assignment, vertices in \( U \) can symbolize jobs and vertices in  \( W \) workers.  Edges will indicate which job is assigned to each worker.
 		\subfile{../Tikz/tikz_bipartite_graph}
 		
-		\item \textbf{Multigraph} [\autoref{fig:multigraph}]: A multigraph is a graph which allows multiple edges between the same pair of vertices. Formally, \( G = (V, E) \) where \( E \) is a multiset of unordered pairs of vertices. Multigraphs are used to model scenarios where multiple relationships or interactions can exist between entities. For example, in transportation networks, multiple routes or connections can exist between the same pair of locations, and these multiple edges can represent different routes or modes of transport.
+		\item \textbf{Multigraph} [\autoref{fig:multigraph}]: it is a graph where multiple edges occur between the same pair of vertices. Formally, \( G = (V, E) \) where \( E \)  is a multiset of unordered pairs of vertices. Multigraphs are often used for modeling networks where multiple relationships or interactions exist for the same pair of vertices. For example, it is known that in transportation networks exists multiple routes or connections between two locations.
 		\subfile{../Tikz/tikz_multigraph}
 		
-		\item \textbf{Cyclic Graph} [\autoref{fig:cyclic-graph}]: A cyclic graph is a graph that contains at least one cycle, where a cycle is a path of edges and vertices wherein a vertex is reachable from itself. Cyclic graphs are used to model processes or systems where feedback loops are present. For example, in certain biological systems or in recurrent neural networks, cycles can represent the feedback mechanisms or recurrent connections.
+		\item \textbf{Cyclic Graph} [\autoref{fig:cyclic-graph}]: is the one that contains at least a cycle, being a cycle a path where every vertex on it is reachable from itself. Cyclic graphs are employed to model processes or systems where feedback loops are present. For example, it could be said that in certain biological systems or recurrent neural networks, loops represent the actions or the recurrent connections respectively.
 		\subfile{../Tikz/tikz_cyclic_graph}
 		
-		\item \textbf{Acyclic Graph} [\autoref{fig:acyclic-graph}]: An acyclic graph is a graph with no cycles. A directed acyclic graph (DAG) is a directed graph with no directed cycles. Acyclic graphs, especially directed acyclic graphs (DAGs), are used in scenarios such as scheduling tasks, where dependencies must not form cycles. In such cases, a task can only start once all its prerequisite tasks are completed, and the absence of cycles ensures that there are no circular dependencies.
+		\item \textbf{Acyclic Graph} [\autoref{fig:acyclic-graph}]: An acyclic graph is a graph without loops. A direct acyclic graph (DAG) is a directed graph without loops. Acyclic graphs, specially DAGs, are mainly used for modeling cases as task scheduling, where dependencies should not form cycles. In this kind of situation, a task will start only if all its prerequisites are completed. The absence of loops ensures that there aren't circular dependencies.
 		\subfile{../Tikz/tikz_acyclic_graph}
 		
 	\end{itemize}
 	
 	\subsection{Graph Representation}
-	Graphs can be represented in various ways, including:
+	There are several manners to represent a graph, including:
 	
 	\begin{itemize}
-		\item \textbf{Adjacency Matrix} [\autoref{fig:adjacency-matrix}]: An adjacency matrix \( A \) for a graph \( G = (V, E) \) is a square matrix of size \( |V| \times |V| \). The entry \( A_{ij} \) is 1 if there is an edge between vertices \( v_i \) and \( v_j \), and 0 otherwise. This representation is particularly useful for dense graphs, where the number of edges is close to the maximum possible number of edges. It allows for efficient querying of edge existence and is easy to implement for algorithms that require frequent checks of edge presence. However, the space complexity is \( O(|V|^2) \), which can be prohibitive for large graphs with many vertices.
+		\item \textbf{Adjacency Matrix} [\autoref{fig:adjacency-matrix}]: An adjacency matrix \( A \) corresponding to a graph \( G = (V, E) \) is a binary square matrix of size \( |V| \times |V| \)  that expresses the existence of a relationship between a pair of vertices. The value of \( A_{ij} \) is 1 if there is an edge connecting vertices \( v_i \) and \( v_j \), and 0 otherwise. This structure is particularly convenient for dense graphs where the number of edges is nearest to the limit of possible edges. It facilitates efficiency in the querying process to know if an edge exists and is easy to implement for algorithms that require constant monitoring of the edge's presence. Even so, the space complexity is \( O(|V|^2) \), which is a problem for large graphs with many vertices.
 		\subfile{../Tikz/tikz_adjacency_matrix}
 		
-		\item \textbf{Adjacency List} [\autoref{fig:adjacency-list-undirected}]: An adjacency list is a collection of lists or arrays where each list corresponds to a vertex and contains all the vertices adjacent to that vertex. For a graph \( G = (V, E) \), the adjacency list can be represented as an array of lists \( \{L_1, L_2, \ldots, L_n\} \), where each \( L_i \) contains the neighbors of vertex \( v_i \). This representation is more space-efficient for sparse graphs, where the number of edges is much smaller than the number of possible edges. It facilitates efficient traversal operations such as breadth-first search (BFS) and depth-first search (DFS), where only the relevant neighbors of each vertex need to be examined.
+		\item \textbf{Adjacency List} [\autoref{fig:adjacency-list-undirected}]:  An adjacency list is a collection of lists where each one corresponds to a vertex and contains all the adjacent vertices. Having a graph  \( G = (V, E) \), the adjacency list could be implemented as a list array \( \{L_1, L_2, \ldots, L_n\} \) and every \( L_i \) will include all \( v_i \)'s neighbors. These structures are more efficient for sparse graphs due to the number of edges is much smaller than the number of possible edges. The use of an adjacency list facilitates the work of graph algorithms such as breadth-first search (BFS) and depth-first search (DFS), where only the more important neighbors need to be visited.
 		\subfile{../Tikz/tikz_adjacency_list}
 		
 	\end{itemize}
 	
 	\subsection{Properties of Graphs}
-	Graphs possess various properties that help in their analysis and application. Some of these properties include:
+	Graphs have some outstanding properties that help to analyze them and determine the best application for each type, including:
 	
 	\begin{itemize}
-		\item \textbf{Degree} [\autoref{fig:degree-example}]: The degree of a vertex is the number of edges incident to it. For a vertex \( v \) in a graph \( G = (V, E) \), the degree \( \deg(v) \) is the count of edges connected to \( v \). In directed graphs, the in-degree represents the number of incoming edges and the out-degree represents the number of outgoing edges. High-degree vertices often play a crucial role in the graph, indicating significant or highly connected nodes.
+		\item \textbf{Degree} [\autoref{fig:degree-example}]: The degree of a vertex is the number of vertices in the graph that incident on it. Formally, for a vertex \( v \) in a graph \( G = (V, E) \), the degree \( \deg(v) \) is the number of vertices connected to it. In the case of direct graphs, the in-degree stands for the number of incoming edges, and the out-degree stands for the number of outgoing edges. Vertices with high degrees generally play a crucial role in a graph, indicating significant or highly connected nodes.
+		
 		\subfile{../Tikz/tikz_degree_example}
 		
-		\item \textbf{Connectivity} [\autoref{fig:connectivity-example}]: Connectivity refers to how well nodes are interconnected within a graph. A graph is said to be connected if there is a path between every pair of vertices. This property is vital for understanding network reliability and robustness, as it ensures that all nodes can communicate or reach each other directly or indirectly.
+		\item \textbf{Connectivity} [\autoref{fig:connectivity-example}]: Connectivity refers to the way nodes are connected within the graph. A graph is called connected if there exists a path between every pair of vertices, in other words, each vertex is reachable from any other vertex in the graph. This is a key property for understanding reliability and network robustness and ensures that all nodes can communicate directly or indirectly between them.
 		\subfile{../Tikz/tikz_connectivity_example}
 		
-		\item \textbf{Centrality} [\autoref{fig:centrality-example}]: Centrality measures are used to identify the most important vertices within a graph. Different types of centrality include degree centrality, which counts the number of direct connections a vertex has; closeness centrality, which measures how quickly a vertex can access other vertices; and betweenness centrality, which quantifies how often a vertex acts as a bridge along the shortest path between other vertices. These measures provide various insights into the roles and influence of vertices in a network.
+		\item \textbf{Centrality} [\autoref{fig:centrality-example}]: The centrality measures are employed to identify the most significant vertices in a graph. Some of the most important metrics are degree centrality, which quantifies the direct connections to a vertex; closeness centrality, which evaluates the velocity of a node to reach another; and betweenness centrality, which assesses how many times a vertex acts as a bridge in the closeth path between a pair of vertices. These metrics offer distinct points of view about the importance and influence of a node in the net.
 		\subfile{../Tikz/tikz_centrality_example}
 		
-		\item \textbf{Clustering Coefficient} [\autoref{fig:clustering-coefficient-example}]: The clustering coefficient of a vertex measures the extent to which neighbors of the vertex are also connected to each other. A high clustering coefficient indicates a tightly-knit community within the graph. In mathematical terms, it is calculated as the ratio of the number of actual edges to the number of possible edges among the neighbors of a vertex.
+		\item \textbf{Clustering Coefficient} [\autoref{fig:clustering-coefficient-example}]: The clustering coefficient of a vertex measures how connected the neighbors of that vertex are to each other. A high clustering coefficient suggests a community closely linked in the graph. In mathematics terms, it is defined as the proportion between the real edges and the possible edges among the vertex neighbors.
 		\subfile{../Tikz/tikz_clustering_coefficient_example}
 		
-		\item \textbf{Graph Diameter} [\autoref{fig:graph-diameter-example}]: The diameter of a graph is the length of the longest shortest path between any pair of vertices. This metric provides an indication of the "spread" of the graph and helps in understanding how far apart vertices can be in terms of the shortest path distance.
+		\item \textbf{Graph Diameter} [\autoref{fig:graph-diameter-example}]: The diameter of a graph is the length of the longest shortest paths between any pair of vertices. This metric indicates the "spread" of the graph and helps to understand how distant the vertices are, considering the minimum distance that connects them.
 		\subfile{../Tikz/tikz_graph_diameter_example}
 		
-		\item \textbf{Graph Density} [\autoref{fig:graph-density-example}]: Graph density is defined as the ratio of the number of edges in the graph to the number of possible edges between vertices. For a graph with \( n \) vertices, the maximum number of edges is \( \frac{n(n-1)}{2} \) in an undirected graph. Density provides a measure of how close the graph is to being a complete graph, where all possible edges are present.
+		\item \textbf{Graph Density} [\autoref{fig:graph-density-example}]: The density of a graph is defined as the proportion between the number of existing edges and the maximum possible edges among the vertices. In an undirected graph with \( n \) vertices, the total of possible edges is \( \frac{n(n-1)}{2} \). The density indicates how close the graph is to completeness, it means,  how close it is to having all possible edges.
 		\subfile{../Tikz/tikz_graph_density_example}
 		
 	\end{itemize}

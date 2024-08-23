@@ -1,0 +1,30 @@
+\begin{lstlisting}[label={code:incremental_consecutor}, caption={Incremental Consecutor}]
+class IncrementalConsecutor(Consecutor):
+	"""IncrementalConsecutor add nodes and edges. The way it does so ensures there are no isolates at any moment."""
+	def _next(self, G : nx.Graph, rand : float) -> HistoryValue:
+		if rand <= 0.7:
+			return self.__add_edge(G)
+		else:
+			return self.__add_node_and_edges(G)
+	
+	def __add_node_and_edges(self, G : nx.Graph) -> HistoryValue:
+		"""Add a new node and k edges from the new node to random nodes"""
+		new_node = super()._new_node(G)
+		G.add_node(new_node)
+		nodes = super()._nodes(G)
+		k = randint(1, len(nodes) - 1)
+		choices = list(filter(lambda n : n != new_node, nodes))
+		for _ in range(0, k):
+			target = super()._rand_obj_list(choices)
+			G.add_edge(new_node, target)
+			choices.remove(target)
+		return G, (1+k, 0, 1, k)
+	
+	def __add_edge(self, G : nx.Graph) -> HistoryValue:
+		"""Add a new edge if not fully connected"""
+		new_edge = super()._new_edge(G)
+		if new_edge is None:
+			return G, (0, 0, 0, 0)
+		G.add_edge(*new_edge)
+		return G, (1, 0, 0, 1)
+\end{lstlisting}

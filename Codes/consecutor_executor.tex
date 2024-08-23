@@ -1,0 +1,35 @@
+\begin{lstlisting}[label={code:consecutor_executor}, caption={Consecutor Executor}]
+class ConsecutorExecutor():
+	"""ConsecutorExecutor can be used to execute steps consecutions starting from a graph G"""
+	def __init__(self, consecutor: Consecutor):
+		self.consecutor = consecutor
+	
+	def execute(self, 
+		G : nx.Graph, 
+		steps = 100, 
+		stopper : Callable[[nx.Graph], bool] = None, 
+		skip_zero_ged = True) -> History :
+		"""Perform steps attempts to modify graph G.
+		Parameters:
+		1. G, the graph where to start from
+		2. steps, the number of atomic modifications
+		3. stopper, an early custom stopping function on newly generated graph
+		4. skip_zero_ged, a Consecutor may return a G' with ged 0 w.r.t. G
+		Returns a dict representing the history of graph generations with edit distance from previous graph.
+		"""
+		history = {}
+		history[0] = (G, (0, 0, 0, 0))
+		for i in tqdm(range(1, steps+1), total=steps+1, desc="History Generation"):
+			try:
+				# Generation and update G
+				G, taged = self.consecutor.next(G)
+			except UnprocessableError:
+				break
+		# Custom stopping condition on newly generated graph
+		if stopper is not None and stopper(G):
+			break
+		# Save only when necessary
+		if taged[0] != 0 or not skip_zero_ged:
+			history[i] = (G, taged)
+		return history	
+\end{lstlisting}

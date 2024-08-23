@@ -1,0 +1,47 @@
+\begin{lstlisting}[label={code:abstract_consecutor}, caption={Abstract Consecutor}]
+class Consecutor(ABC):
+	def next(self, G : nx.Graph) -> HistoryValue:
+		"""Return a tuple with a new graph G' and the distance from G (can be 0)"""
+		if not self._is_processable(G):
+			raise UnprocessableError()
+		copy = deepcopy(G)
+		rand = random()
+		return self._next(copy, rand)
+	
+	@abstractmethod
+	def _next(self, G : nx.Graph, rand : float) -> HistoryValue:
+		"""Actual next logic from concrete classes"""
+		raise NotImplementedError()
+	
+	def _is_processable(self, G : nx.Graph) -> bool:
+		"""Whether you can make a 'next' on graph G"""
+		return len(self._nodes(G)) > 0 and len(self._edges(G)) > 0
+	
+	def _nodes(self, G : nx.Graph) -> List[int]:
+		"""Return the list of nodes of the graph G"""
+		return list(G.nodes)
+	
+	def _edges(self, G : nx.Graph) -> List[Tuple[int, int]]:
+		"""Return the list of edges of the graph G"""
+		return list(G.edges)
+	
+	def _rand_obj_list(self, l : List):
+		"""Return a random object in list if not empty else None"""
+		return l[randint(0, len(l) - 1)] if len(l) > 0 else None
+	
+	def _new_node(self, G : nx.Graph):
+		"""Return a new node for the graph G (biggest indexed node + 1)"""
+		return (self._nodes(G)[-1] + 1) if len(self._nodes(G)) > 0 else 0
+	
+	def _rand_node(self, G : nx.Graph):
+		"""Return a random existing node of G if any else None"""
+		return self._rand_obj_list(self._nodes(G))
+	
+	def _new_edge(self, G : nx.Graph):
+		"""Return a new edgre for the graph G if not fully-connected else None"""
+		return self._rand_obj_list(list(nx.non_edges(G)))
+	
+	def _rand_edge(self, G : nx.Graph):
+		"""Return a random existing edge of G if any else None"""
+		return self._rand_obj_list(self._edges(G))
+\end{lstlisting}

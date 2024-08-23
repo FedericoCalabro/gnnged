@@ -1,0 +1,24 @@
+\begin{lstlisting}[label={code:dataset_generation_example}, caption={Dataset Generation Example}]
+generator = RandomGraphGenerator()
+hist_utils = HistoryUtilities()
+stop_on_empty = lambda G: len(list(G.nodes))==0
+
+start = generator.generate_random_ER_graph(3, 6, 0.5, 1)
+# start = generator.generate_random_BA_graph(2, 5)
+
+consecutor = IncrementalConsecutor()
+# consecutor = DecrementalConsecutor()
+
+exc_consecutor = ConsecutorExecutor(consecutor)
+
+# Change the parameter to generate more consecutio steps
+history = exc_consecutor.execute(start, steps=1000, stopper=stop_on_empty, skip_zero_ged=True)
+
+ged = hist_utils.build_ged_combination(history)
+train, test = hist_utils.split_by_fractions(history, train=0.8, test=0.2)
+
+NAME = "Medium"
+hist_utils.save_to_sparse_jsons(train, f'json_data/{NAME}/train/')
+hist_utils.save_to_sparse_jsons(test, f'json_data/{NAME}/test/')
+json.dump(ged, open(f'json_data/{NAME}/TaGED.json', 'w'))
+\end{lstlisting}

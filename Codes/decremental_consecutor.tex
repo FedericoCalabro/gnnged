@@ -1,0 +1,30 @@
+\begin{lstlisting}[label={code:decremental_consecutor}, caption={Decremental Consecutor}]
+class DecrementalConsecutor(Consecutor):
+"""DecrementalConsecutor removes nodes and edges, after any atomic operation it also removes isolated nodes."""
+	def _next(self, G : nx.Graph, rand : float) -> HistoryValue:
+		if rand <= 1:
+			return self._remove_edge(G)
+		else:
+			return self._remove_node_and_edges(G)
+
+	def _remove_node_and_edges(self, G : nx.Graph) -> HistoryValue:
+		"""Remove a random node along with its edges, if this causes a node to be isolated it is removed aswell"""
+		rvm_node = self._rand_node(G)
+		if rvm_node is None:
+			return G, (0, 0, 0, 0)
+		degree = G.degree(rvm_node)
+		G.remove_node(rvm_node)
+		isolated = list(nx.isolates(G))
+		G.remove_nodes_from(isolated)
+		return G, (1+degree+len(isolated), 0, 1+len(isolated), degree)
+	
+	def _remove_edge(self, G : nx.Graph) -> HistoryValue:
+		"""Remove a random edge if there are any, if this causes a node to be isolated it is removed aswell"""
+		rvm_edge = self._rand_edge(G)
+		if rvm_edge is None:
+			return G, (0, 0, 0, 0)
+		G.remove_edge(*rvm_edge)
+		isolated = list(nx.isolates(G))
+		G.remove_nodes_from(isolated)
+		return G, (1+len(isolated), 0, len(isolated), 1)
+\end{lstlisting}
