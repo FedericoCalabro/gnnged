@@ -3,17 +3,16 @@
 	\section{Methodology and Experimentation}
 	\label{sec:methodology_and_experimentation}
 	
-	Working with high quality dataset is key to obtain performant models, but data, and in particular GED labelling within \cite{computing_graph_edit_distance_via_neural_graph_matching} is just an approximation of the real value, thus influencing model training worsening performances.
-	
+	Working with high-quality datasets is crucial for developing performant models. However, in \cite{computing_graph_edit_distance_via_neural_graph_matching}, the data, particularly the GED labels, are mostly approximations, which negatively impacts model training and performance. A method for generating artificial data is detailed in [\autoref{sec:artificial_dataset_generation}], while the results of fair testing are summarized in the tables found in [\autoref{sec:experiments_results}]
 	
 	\subsection{Artificial Dataset Generation}
 	\label{sec:artificial_dataset_generation}
 
 	The proposed code is publicly available on \href{https://github.com/FedericoCalabro/gnnged/blob/vldb/1.%20synthetic_dataset_v2.ipynb}{GitHub} and is meant as a starting point for generating an high quality dataset composed of exact (TaGSim like) GED values along with randomly generated graphs at fixed distances.
-	When working with Python programming language it is often not needed to reinvent the wheel because a package that suits requirements probably already exists and within this context a large use of \href{https://networkx.org/}{NetworkX} (nx) is made to handle graphs data structures.
+	When working with Python programming language it is often not needed to reinvent the wheel because a package that suits requirements probably already exists and within this context, a large use of \href{https://networkx.org/}{NetworkX} (nx) is made to handle graphs data structures.
 	
 	\subfile{../Codes/random_graph_generator}
-	\textit{RandomGraphGenerator} [\autoref{code:random_graph_generator}] is a class that provides two public methods for generating random graphs by reusing \textit{nx} package. Specifically two methods for generating different variants of graphs are provided: one for \href{https://en.wikipedia.org/wiki/Erd%C5%91s%E2%80%93R%C3%A9nyi_model}{Erdős-Rényi's} types of graphs (or binomial graph) and one for \href{https://en.wikipedia.org/wiki/Barab%C3%A1si%E2%80%93Albert_model}{Barabási–Albert's} ones. Additionally, we want to make sure the graphs are connected (there are no isolates nodes) to prevent errors during future computations. 
+	\textit{RandomGraphGenerator} [\autoref{code:random_graph_generator}] is a class that provides two public methods for generating random graphs by reusing \textit{nx} package. Specifically two methods for generating different variants of graphs are provided: one for \href{https://en.wikipedia.org/wiki/Erd%C5%91s%E2%80%93R%C3%A9nyi_model}{Erdős-Rényi's} types of graphs (or binomial graph) and one for \href{https://en.wikipedia.org/wiki/Barab%C3%A1si%E2%80%93Albert_model}{Barabási–Albert's} ones. Additionally, it is important to make sure that graphs are connected at any time to prevent errors during future computations. 
 	
 	\subfile{../Codes/abstract_consecutor}
 	The \textit{Consecutor} class is what will handle the generation of a graph $G'$ starting from $G$ at a fixed known GED distance. In [\autoref{code:abstract_consecutor}] is showed the abstract \textit{Consecutor} class that provides common methods for managing graphs modifications.
@@ -34,6 +33,7 @@
 	With [\autoref{code:dataset_generation_example}] is an example of how to put all the pieces together to actually create a custom dataset and save it to disk in a format suitable GedGNN.
 	
 	\subsection{Experiments and Results}
+	\label{sec:experiments_results}
 	
 	For experimenting and conducting a fair evaluation of the models, two well known datasets, \href{https://paperswithcode.com/dataset/imdb-multi}{IMDB} and \href{https://paperswithcode.com/dataset/linux}{Linux}, as well as two artificially generated datasets, \emph{1000g\_100n} and \emph{Medium} have been employed:
 	

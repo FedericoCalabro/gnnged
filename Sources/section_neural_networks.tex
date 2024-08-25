@@ -4,18 +4,18 @@
 	\section{Neural Networks}
 	\label{sec:neural_networks}
 	
-	A \emph{neural network} is a complex computational model inspired by anatomy of the human brain. These models are designed to learn and particularly to recognize patterns in a given data by imitating the functionalities of biological neurons. In fact, the building blocks of every existing neural network are called neurons or nodes. Each of these unit performs simple computations that when combined together allow to tackle a wide range of tasks in a sort of magical way.
+	A \emph{neural network} is a complex computational model inspired by anatomy of the human brain. These models are designed to learn and particularly to recognize patterns in a given data by imitating the functionalities of biological neurons. In fact, the building blocks of every existing neural network are called neurons or nodes. Each of these unit performs simple computations that when combined together allow to tackle a wide range of tasks.
 	
 	\subsection{Basic Structure of a Neural Network}
 	
-	Neurons in a neural networks are organized in \emph{layers} which determine the structure and the capability of the net it self. There is a plenitude of way to organize models, but the simplest we can think of [\autoref{fig:basic-nn}] consists only of three layers.
+	Neurons in a neural networks are organized in \emph{layers} which determine the structure and the capability of the net itself. There is a plenitude of way to organize models, but the simplest one [\autoref{fig:basic-nn}] consists only of three layers.
 	
 	\begin{itemize}
-		\item \textbf{Input Layer}: The first layer of every net. It consists of input neurons that receive the initial data. Usually, each neuron in the input layer corresponds to a feature or example in the input dataset. For instance if we are working with an image recognition model, each neuron might represent a pixel value of the input image.
+		\item \textbf{Input Layer}: The first layer of every net. It consists of input neurons that receive the initial data. Usually, each neuron in the input layer corresponds to a feature or example in the input dataset. For instance, if there is used an image recognition model, each neuron might represent a pixel value of the input image.
 		
-		\item \textbf{Hidden Layer}: Intermediate layer where the actual computation and learning is performed. In the simplest case we only have one hidden layer, but as we will see there can be many more. Each hidden layer consists of neurons that apply \emph{weights} and \emph{activations functions} to the inputs received from the previous layer.
+		\item \textbf{Hidden Layer}: Intermediate layer where the actual computation and learning is performed. In the simplest case, there is just one hidden layer, but in complex networks there can be many more. Each hidden layer consists of neurons that apply \emph{weights} and \emph{activations functions} to the inputs received from the previous layer.
 		
-		\item \textbf{Output Layer}: The last layer in the network, which produces the actual output. For example if we are building a regression task model the output layer could consist of a single neuron which will produce a numeric value as prediction.
+		\item \textbf{Output Layer}: The last layer in the network, which produces the actual output. For example, when a model is built for a regression task the output layer could be composed of a single neuron which will produce a numeric value as prediction.
 	\end{itemize}
 	
 	The following figure represents a basic neural network with one hidden layer, showing how data flows from the input layer, through the hidden layer, to the output layer:
@@ -23,7 +23,7 @@
 	
 	\subsubsection{Activation Functions}
 
-	As already said, in a neural network, each neuron is connected to one or more neurons in the next layer (with exception of the output layer) through \emph{activation functions}. These functions are crucial because they introduce non-linearity into the model, allowing it to capture and learn complex relationships within the data. Without activation functions, we could build a net with thousands of hidden layers but it would still be limited to "linear predictions". Some commonly used activation functions include:
+	As mentioned before, in a neural network, each neuron is connected to one or more neurons in the next layer (with exception of the output layer) through \emph{activation functions}. These functions are crucial because they introduce non-linearity into the model, allowing it to capture and learn complex relationships within the data. Without activation functions, it could be built a net with thousands of hidden layers but it would still be limited to "linear predictions". Some commonly used activation functions include:
 	
 	\begin{itemize}
 		\item \textbf{Sigmoid}: This function maps any real number into the range (0, 1). It is often used in the output layer for binary classification problems where a probability is needed as output.
@@ -42,24 +42,24 @@
 	
 \subsection{Training Neural Networks}
 
-In supervised learning data used is said to \emph{labeled} meaning that for each \emph{example} its \emph{class} is known. Unsupervised and Semi-supervised learning also exist but we are going to deal with these. Weights are numerical values associated with the connections between neurons, usually being in the range [0, 1] when the data is normalized. Training a neural networks means to find the optimal weights values for each connection so to minimize the error between model's prediction and the actual target values. This is usually achieved through the employment of a technique known as \emph{backpropagation} and the usage of an optimization algorithm such as \emph{gradient descent}. The training process is conducted iteratively until net's performance start to degrade or simply it stops learning. This is done with the usage of a dataset usually split in three parts:
+Supervised Learning is a machine learning approach where the data is said to be \emph{labeled}, meaning that for each \emph{example} its \emph{class} is known. There exist \href{https://en.wikipedia.org/wiki/Unsupervised_learning}{Unsupervised} and \href{https://en.wikipedia.org/wiki/Weak_supervision}{Semi-supervised} learning, differents types of automatic learning that will not be discussed in detail as they are not used in this work. Weights are numerical values associated with the connections between neurons, usually being in the range [0, 1] when the data is normalized. Training a neural networks means to find the optimal weights values for each connection so to minimize the error between model's prediction and the actual target values. This is usually achieved through the employment of a technique known as \emph{backpropagation} and the usage of an optimization algorithm such as \emph{descent gradient}. The training process is conducted iteratively until net's performance start to degrade or simply it stops learning. This is done with the usage of a dataset usually split in three parts:
 
 \begin{itemize}
-	\item \textbf{Training Set}: This subset is used to adjust the weights of the network when performing the actual training. The model learns and updates its weights based on this data to minimize the error between its predictions and the actual values. Usually it constitutes about the 80\% of the whole dataset and if it isn't enough big then techniques to generate artifical data are used.
+	\item \textbf{Training Set}: This subset is used to adjust the weights of the network when performing the actual training. The model learns and updates its weights based on this data to minimize the error between its predictions and the actual values. Usually it constitutes about the 80\% of the whole dataset and if it isn't enough big then techniques to generate artificial data are used.
 	
-	\item \textbf{Validation Set}: This small subset is used to tune \emph{hyperparameters}, which are the parameters set before the training process begins. Common hyperparameters include the learning rate, the number of hidden layers, the optimization algorithm, the number of neurons in each layer and so on and so forth. Hyperparameters thus could influence the model's architecture significantly and hence finding the right values is crucial for achieving optimal performance. Hyperparameters are usually tested within a space and the best one are then selected. It's especially important to prevent a phenomenon known as \emph{overfitting}.
+	\item \textbf{Validation Set}: This small subset is used to tune \emph{hyperparameters}, which are the parameters set before the training process begins. Common hyperparameters include the learning rate, the number of hidden layers, the optimization algorithm, the number of neurons in each layer among others. Hyperparameters thus could influence the model's architecture significantly and hence finding the right values is crucial for achieving optimal performance. Hyperparameters are usually tested within a limited search space and the best ones are then selected. It's especially important to prevent a phenomena known as \emph{overfitting}.
 	
-	\item \textbf{Test Set}: This small to medium sized subset is used to evaluate the model's performance on data it has not seen before. By testing the model on never seen data we obtain unbiased measures metrics to evaluate the model in a fair way.
+	\item \textbf{Test Set}: This small to medium sized subset is used to evaluate the model's performance on data that it has not seen before. By testing the model on new data, unbiased measures are obtained to evaluate the model in a fair way.
 \end{itemize}
 
-\emph{Overfitting} occurs when a model learns the training data too well, capturing noise and details. This leads to high accuracy on the training set but poor performance on the test set. To mitigate and prevent overfitting, techniques such as regularization, dropout, and early stopping are employed to ensure the model generalizes well to unseen data. The end goal is to have a model that generalize well with the respect to any input and the secret to achieve this is to have good data as first thing.
+\emph{Overfitting} occurs when a model learns the training data too well, capturing noise and details. This leads to high accuracy on the training set but poor performance on the test set. To mitigate and prevent this problem, techniques such as regularization, dropout, and early stopping are employed to ensure the model generalizes well to unseen data. The final goal is to have a model that generalize well with respect to any input, and the secret to achieve this is to have good data as first thing.
 
 	
 	\subsubsection{Backpropagation}
 	
-	Learning for a neural networks means to iteratively apply a forward and a backward pass. In the forward pass, the input data is propagated through the network layer by layer until the output layer is reached. Then the error with respect to the prediction is calculated using a \emph{loss function}, such as mean squared error or mean absolute error. The \emph{gradient} of a function is a fundamental concept in the field of optimization theory because it indicates the direction in which the function maximize. This concept is used in the backward pass, where the gradient of the loss function with respect to each weight of the network is calculated by using the technique note as backpropagation [\autoref{fig:backpropagation}] and backpropagated by applying the chain rule. By exploiting this mechanism over and over weights are adjusted in a manner to minimize the error.
+	Learning for a neural networks means to iteratively apply a forward and a backward pass. In the forward pass, the input data is propagated through the network layer by layer until the output layer is reached. Then the error with respect to the prediction is calculated using a \emph{loss function}, such as mean squared error or mean absolute error. The \emph{gradient} of a function is a fundamental concept in the field of optimization theory because it indicates the direction in which the function increases. This concept is used in the backward pass, where the gradient of the loss function with respect to each weight of the network is calculated by using the technique note as backpropagation [\autoref{fig:backpropagation}] and backpropagated by applying the chain rule. By exploiting this mechanism over and over, weights are adjusted in a manner to minimize the error.
 	
-	The loss function \(L(\mathbf{y}, \mathbf{\hat{y}})\) measures the difference between the predicted output \(\mathbf{\hat{y}}\) and the actual output \(\mathbf{y}\). For example, in a regression task, the mean squared error (MSE) can be used:
+	The loss function \(L(\mathbf{y}, \mathbf{\hat{y}})\) measures the difference between the predicted output \(\mathbf{\hat{y}}\) and the actual output \(\mathbf{y}\). For example, in a regression task, the mean squared error (MSE) can be used with the following formule:
 	
 	\[
 	L(\mathbf{y}, \mathbf{\hat{y}}) = \frac{1}{N} \sum_{i=1}^{N} (y_i - \hat{y}_i)^2
@@ -75,20 +75,20 @@ In supervised learning data used is said to \emph{labeled} meaning that for each
 	
 	\subsubsection{Gradient Descent}
 		
-	Once the gradient of the loss function is calculated, an optimization algorithm such as Gradient descent [\autoref{fig:grad-descent}] is used to iteratively update the weights by shifting them in the opposite direction of the gradient. How much to move them corresponds to the learning rate hyperparameter and is where an optimization algorithm often differs from another. The learning rate needs to be carefully chosen because it might prevent the finding of a minima thus avoiding the convergence of the model. The weight update rule for a weight \(w\) can generally be expressed as:
+	Once the gradient of the loss function is calculated, an optimization algorithm such as gradient descent [\autoref{fig:grad-descent}] is used to iteratively update the weights by shifting them in the opposite direction of the gradient. How much to move them corresponds to the learning rate hyperparameter and is where an optimization algorithm often differs from another. The learning rate needs to be carefully chosen because it might prevent the finding of a minima thus avoiding the convergence of the model. The weight update rule for a weight \(w\) can generally be expressed as:
 	
 	\[
 	w \leftarrow w - \eta \frac{\partial L}{\partial w}
 	\]
 	
-	where \(\eta\) is the learning rate. There is a plenitude of optimization algorithms, such as the stochastic gradient descent (SGD), Adam and RMSprop. Each offering different trade-offs between computation time and convergence stability. It is worth saying that many modern and more complex methods also are capable of dynamically adjusting the learning rate value during the training process.
+	where \(\eta\) is the learning rate. There is a plenitude of optimization algorithms, such as the stochastic gradient descent (SGD), Adam and RMSprop, each offering different trade-offs between computation time and convergence stability. It is worth saying that many modern and more complex methods also are capable of dynamically adjusting the learning rate value during the training process.
 	
 	\subfile{../Tikz/tikz_gradient_descent}
 	
 	\subsection{Advanced Topics in Neural Networks}
 	
 	\subsubsection{Deep Neural Networks}
-	\emph{Deep neural networks} (DNN) [\autoref{fig:deep-nn}] differ from simple one for having multiple hidden layers between the input and output layers. The increased depth allows DNNs to model data of higher order of complexity with respect to simple nets, often allowing for better performances. Each (hidden) layer in a DNN can be thought as learning at a different level of abstraction, with the early layers capturing low-level features and deeper layers capturing high-level features. For instance in a recognizing image system first edges and textures are recognized to later form shapes and objects. This hierarchical learning feature makes DNNs extremely powerful for tasks such as image and speech recognition, natural language processing, and even playing strategic games. Training DNNs, however, requires large amounts of data and computational power, and often employs many different techniques such as dropout and batch normalization to improve performance and prevent overfitting.
+	\emph{Deep neural networks} (DNN) [\autoref{fig:deep-nn}] differ from simple ones for having multiple hidden layers between the input and output layers. The increased depth allows DNNs to model data of higher order of complexity with respect to simple nets, often allowing for better performances. Each (hidden) layer in a DNN can be thought as learning at a different level of abstraction, with the early layers capturing low-level features and deeper layers capturing high-level features. For instance in a recognizing image system first edges and textures are recognized to later form shapes and objects. This hierarchical learning feature makes DNNs extremely powerful for tasks such as image and speech recognition, natural language processing, and even playing strategic games. Training DNNs, however, requires large amounts of data and computational power, and often employs many different techniques such as dropout and batch normalization to improve performance and prevent overfitting.
 	
 	\subfile{../Tikz/tikz_multilayer_feedforward}
 	
@@ -104,24 +104,24 @@ In supervised learning data used is said to \emph{labeled} meaning that for each
 	\subfile{../Tikz/tikz_convolutional_nn}
 	
 	\subsubsection{Recurrent Neural Networks}
-	A \emph{recurrent neural network} (RNN) [\autoref{fig:rnn}] is a is a specialized type of deep neural network that is particularly well-suited for sequential data, such as time series or natural language. Usually, when dealing with data in which the order does matter RNNs are used because they have connections that form directed cycles between its neurons, allowing information to persist. The hidden state \(h_t\) at time step \(t\) is computed based on the input \(x_t\) and the previous hidden state \(h_{t-1}\):
+	A \emph{recurrent neural network} (RNN) [\autoref{fig:rnn}] is a specialized type of deep neural network that is particularly well-suited for sequential data, such as time series or natural language. Usually, when dealing with data in which the order does matter RNNs are used because they have connections that form directed cycles between its neurons, allowing information to persist. The hidden state \(h_t\) at time step \(t\) is computed based on the input \(x_t\) and the previous hidden state \(h_{t-1}\):
 	
 	\[
 	h_t = \sigma(W_h h_{t-1} + W_x x_t + b)
 	\]
 	
-	where \(W_h\) and \(W_x\) are weight matrices, \(b\) is a bias vector, and \(\sigma\) is an activation function. A common problem with RNNs is the \emph{vanishing gradient problem} which occurs when the calculated gradients become too small as they are backpropagated through long sequences. Variants of RNNs, such as Long Short-Term Memory (LSTM) and Gated Recurrent Unit (GRU) networks, try to mitigate this kind of issue while still allowing for learn long-term dependencies to be learned.
+	where \(W_h\) and \(W_x\) are weight matrices, \(b\) is a bias vector, and \(\sigma\) is an activation function. A common problem with RNNs is the \href{https://en.wikipedia.org/wiki/Vanishing_gradient_problem}{vanishing gradient problem} which occurs when the calculated gradients become too small as they are backpropagated through long sequences. Variants of RNNs, such as Long Short-Term Memory (LSTM) and Gated Recurrent Unit (GRU) networks, try to mitigate this kind of issue while still allowing for learn long-term dependencies to be learned.
 	
 	\subfile{../Tikz/tikz_recurrent_nn}
 	
 	\subsubsection{Attention Mechanisms}
-	In many contexts, it might be useful to focus more on specific input's parts than others and this is achieved through the usage of attention mechanisms which where firstly introduced in 2017 with the paper \emph{Attention is all you need} \cite{vaswani2023attentionneed}. Let's say we are dealing with text, then each word in the input text is associated with a \emph{key} and the element we are focusing on is called \emph{query}; then the attention mechanism [\autoref{fig:attention}] is assigning a \emph{value} (weight) to each key with respect to the query. This allows the model to focus on important parts of the input in a dynamic manner and is especially useful for in tasks involving sequences, such as machine translation and text summarization. The attention score for a query vector \(q\) and a set of key vectors \(\{k_1, k_2, \ldots, k_n\}\) is computed as:
+	In many contexts, it might be useful to focus more on specific input's parts than others and this is achieved through the usage of attention mechanisms which where firstly introduced in 2017 with the paper \emph{Attention is all you need} \cite{vaswani2023attentionneed}. In the context of text processing, each word in the input text is associated with a \emph{key} and the element of focus is called \emph{query}; then the attention mechanism [\autoref{fig:attention}] is assigning a \emph{value} (weight) to each key with respect to the query. This allows the model to focus on important parts of the input in a dynamic manner and is especially useful in tasks involving sequences, such as machine translation and text summarization. The attention score for a query vector \(q\) and a set of key vectors \(\{k_1, k_2, \ldots, k_n\}\) is computed as:
 	
 	\[
 	\text{Attention}(q, K, V) = \text{softmax} \left( \frac{qK^T}{\sqrt{d_k}} \right) V
 	\]
 	
-	where \(K\) is the matrix of keys, \(V\) is the matrix of values, and \(d_k\) is the dimension of the keys. Also worth to say, is that attention mechanism can be pretty much be integrated with any type of neural network even though that's not always necessary.
+	where \(K\) is the matrix of keys, \(V\) is the matrix of values, and \(d_k\) is the dimension of the keys. Also worth to say, is that attention mechanism can be integrated in general with any type of neural network even though that's not always necessary.
 	
 	\subfile{../Tikz/tikz_attention_mechanism}
 	
@@ -137,6 +137,6 @@ In supervised learning data used is said to \emph{labeled} meaning that for each
 	
 	\subfile{../Tikz/tikz_message_passing}
 	
-	We are specifically going to focus on GNNs since every state of the art model trying to address the graph edit distance problem [\autoref{sec:graph_similarity_problem}] which make use of artificial neural networks do use this particular architecture with a Siamese layout.
+	This work is specially focus on GNNs since every model in the state of the art is trying to address the graph edit distance problem [\autoref{sec:graph_similarity_problem}], which make use of artificial neural networks to use this particular architecture with a Siamese layout.
 	
 \end{document}
