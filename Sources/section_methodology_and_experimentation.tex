@@ -9,7 +9,7 @@
 	\label{sec:artificial_dataset_generation}
 
 	The proposed code is publicly available on \href{https://github.com/FedericoCalabro/gnnged/blob/vldb/1.%20synthetic_dataset_v2.ipynb}{GitHub} and is meant as a starting point for generating an high quality dataset composed of exact (TaGSim like) GED values along with randomly generated graphs at fixed distances.
-	When working with Python programming language it is often not needed to reinvent the wheel because a package that suits requirements probably already exists and within this context, a large use of \href{https://networkx.org/}{NetworkX} (nx) is made to handle graphs data structures.
+	When working with Python programming language it is often not needed to reinvent the wheel because a package that suits requirements probably already exists and within this context, a large use of \href{https://networkx.org/}{NetworkX} (nx) is made to handle graphs data structures. Specifically, two methods for generating an artificial dataset are proposed: one does it in an incremental way, starting from a small graph and increasing its complexity with each iteration, the other does it in the opposite way, starting from a big graph and reducing its complexity at each step. With such methodology it will be possible to generate a dataset of $n$ graphs and know the GED for each pair of graph in the dataset.
 	
 	\subfile{../Codes/random_graph_generator}
 	\textit{RandomGraphGenerator} [\autoref{code:random_graph_generator}] is a class that provides two public methods for generating random graphs by reusing \textit{nx} package. Specifically two methods for generating different variants of graphs are provided: one for \href{https://en.wikipedia.org/wiki/Erd%C5%91s%E2%80%93R%C3%A9nyi_model}{Erdős-Rényi's} types of graphs (or binomial graph) and one for \href{https://en.wikipedia.org/wiki/Barab%C3%A1si%E2%80%93Albert_model}{Barabási–Albert's} ones. Additionally, it is important to make sure that graphs are connected at any time to prevent errors during future computations. 
@@ -30,7 +30,7 @@
 	\textit{HistoryUtilities} [\autoref{code:history_utilities}] is the final piece of utility to generate and save to disk the dataset consisting of all possible combinations of a given list of sequentially generated graphs along with their TaGED.  
 	
 	\subfile{../Codes/dataset_generation_example}
-	With [\autoref{code:dataset_generation_example}] is an example of how to put all the pieces together to actually create a custom dataset and save it to disk in a format suitable GedGNN.
+	With [\autoref{code:dataset_generation_example}] is an example of how to put all the pieces together to actually create a custom dataset and save it to disk in a format suitable GedGNN. With this specific code, it will be generated a dataset called \textit{Medium} (more information in \autoref{sec:experiments_results}) consisting of 1000 graphs, starting from random graph called $start$ in an \textit{incremental} way; then the data is processed to retrieve GED information for each pair of graphs and the whole is split into a training set (80\%) and a test set (20\%).
 	
 	\subsection{Experiments and Results}
 	\label{sec:experiments_results}
@@ -180,6 +180,7 @@
 	\end{table}	
 	
 	\emph{GedGNN} seems to be the most promising model for artificial dataset testing. When training on \emph{1000g\_100n} and \emph{Medium}, \emph{GedGNN} showed positive results while getting tested on both \emph{IMDB} and \emph{Linux}. A clear sign that if a much bigger and denser dataset were to be used it could have outperformed others specialized types of datasets.
-
+	
+	In conclusion, it is necessary to differentiate between the testing of models on the same data distribution that has been used during training (in-distribution) and testing on new types of data (out-of-distribution). When the models are trained and tested on similar types of graph data (in-distribution), most of the models do well with GedGNN being the best. However, when models are evaluated on data that is not part of the training distribution, the performance of all the models is rather poor. There is one exception, which is the models trained on the Medium dataset, which has the potential of enhancing the generalization but the dataset needs to be denser and much larger. At the moment, heuristic methods are usually more effective than models in out-of-distribution conditions, especially when evaluating deviation from the true GED (Graph Edit Distance).
 	
 \end{document}
