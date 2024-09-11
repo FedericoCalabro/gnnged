@@ -1,18 +1,19 @@
 \documentclass[../Thesis.tex]{subfiles}
 \begin{document}
 	
-	\section{State of the Art Review}
+	\chapter{State of the Art}
 	\label{sec:state_of_the_art_review}
 	
-	Calculating the GED with traditional imperative algorithm is possible but feasible only for graphs of modest size. GED is a NP-HARD problems and for traditional solutions there is no way except to compare graphs node by node and edge by edge through combinatorial techniques to find a solution. However, as the number of nodes in the graphs increase, the complexity of these methods grows exponentially, leading to scalability issues thus infeasibility. To overcome these limitations recent works involve the use of artificial intelligence techniques such as neural networks to predict the GED between two graphs. AI-based approaches usually offer more robust and scalable solutions by learning patterns and features from graphs, significantly reducing computation times. This section reviews some of the most important papers dealing with GED calculation from 2019 to the time of writing this (2024).
+	Calculating the GED with traditional imperative algorithm is possible but feasible only for graphs of modest size. GED is a NP-HARD problem and for traditional solutions there is no way except to compare graphs node by node and edge by edge through combinatorial techniques to find a solution. However, as the number of nodes in the graphs increase, the time needed by these methods grows exponentially, leading to scalability issues thus infeasibility. To overcome these limitations recent works involve the use of artificial intelligence techniques such as neural networks to predict the GED between two graphs. AI-based approaches usually offer more robust and scalable solutions by learning patterns and features from graphs, significantly reducing computation times. This section reviews some of the most important papers dealing with GED calculation from 2019 to the time of writing this (2024).
 
 	A timeline of significant works, beginning in 2019 with \textit{SimGNN} \cite{simgnn__a_neural_network_approach_to_fast_graph_similarity_computation}, the first to use neural networks for GED computation, is discussed in \autoref{sec:timeline}. Following \textit{SimGNN}, numerous models have been developed, each trying to offer something new and better performances. The timeline concludes with the most recent and promising model, \textit{GedGNN} \cite{computing_graph_edit_distance_via_neural_graph_matching}. Although these models strive to estimate GED between graphs accurately, as will be shown, this area is still in the early stages of development.
 	
 	
-	\subsection{Timeline}
+	\section{Timeline}
 	\label{sec:timeline}
-	
-	2019, \textit{SimGNN: SimGNN: A Neural Network Approach to Fast Graph Similarity Computation} \cite{simgnn__a_neural_network_approach_to_fast_graph_similarity_computation}: Presents the SimGNN to solve the problem of graph similarity using neural networks. It uses a learnable embedding function, an attention mechanism to capture important nodes, and a pairwise node comparison, which is more general and efficient than the baselines.
+        \quad
+ 
+	2019, \textit{SimGNN: A Neural Network Approach to Fast Graph Similarity Computation} \cite{simgnn__a_neural_network_approach_to_fast_graph_similarity_computation}: Presents the SimGNN to solve the problem of graph similarity using neural networks. It uses a learnable embedding function, an attention mechanism to capture important nodes, and a pairwise node comparison, which is more general and efficient than the baselines.
 	
 	2020, \textit{Learning Graph Edit Distance by Graph Neural Networks} \cite{learning_graph_edit_distance_by_graph_neural_networks}: Presents a framework that integrates deep metric learning with the conventional approximations of graph edit distance using geometric deep learning. The approach uses a message passing neural network (MPNN) to encode graph structure and compute graph distances effectively, achieving state-of-the-art performance in graph retrieval and competitive results in graph similarity learning.
 	
@@ -47,8 +48,13 @@
 	2023, \textit{Wasserstein Graph Distance Based on L1-Approximated Tree Edit Distance Between Weisfeiler-Lehman Subtrees} \cite{wasserstein_graph_distance_based_on_l1_approximated_tree_edit_distance_between_weisfeiler_lehman_subtrees}: Introduces the WWLS distance which integrates WL subtrees with L1-TED which is more sensitive to fine changes in the structure of graphs and outperforms other methods in metric validation and graph classification.
 	
 	2023, \textit{Computing Graph Edit Distance via Neural Graph Matching} \cite{computing_graph_edit_distance_via_neural_graph_matching}: Presents GEDGNN, a deep learning model for GED computation that works on the idea of graph transformation instead of directly predicting GED value. GEDGNN provides GED values and a matching matrix and a post-processing procedure for obtaining high quality node mappings.
+
+\section{Trends in the field of GNN-based GED approximation}
+The previous timeline shows that the field of graph similarity and graph edit distance (GED) computation has evolved significantly from 2019 to 2023, with most approaches building upon the Siamese Graph Neural Network architecture by adding various layers and operations. Techniques such as SimGNN\cite{simgnn__a_neural_network_approach_to_fast_graph_similarity_computation} and subsequent models typically enhance neural networks with additional layers, like attention mechanisms\cite{simgnn__a_neural_network_approach_to_fast_graph_similarity_computation, noah__neural_optimized_a*_search_algorithm_for_graph_edit_distance_computation, exploring_attention_mechanism_for_graph_similarity_learning, graph_edit_distance_learning_via_different_attention, graph_graph_context_dependency_attention_for_graph_edit_distance}, Graph Isomorphism Networks (GIN) \cite{noah__neural_optimized_a*_search_algorithm_for_graph_edit_distance_computation}, message passing neural networks \cite{learning_graph_edit_distance_by_graph_neural_networks}, or by leveraging hierarchical structures through graph partitioning and hypergraph matching \cite{graph_partitioning_and_graph_neural_network_based_hierarchical_graph_matching_for_graph_similarity_computation, multilevel_graph_matching_networks_for_deep_graph_similarity_learning, h2mn__graph_similarity_learning_with_hierarchical_hypergraph_matching_networks}. These layers help in capturing intricate details of graph structures and improving efficiency and accuracy in similarity computations. However, some approaches stand out due to their distinct methodologies. For instance, TaGSim \cite{TaGSim_type_aware_graph_similarity_learning_and_computation} incorporates type-specific graph edit operations and synthetic data generation. Additionally, approaches such as Noah\cite{noah__neural_optimized_a*_search_algorithm_for_graph_edit_distance_computation} and MATA*\cite{mata_combining_learnable_node_matching_with_a*_algorithm_for_approximate_graph_edit_distance} combine neural networks with classical algorithms like the A* search, showcasing innovative blends of traditional and modern techniques. These unique strategies highlight the diversity and depth of research efforts aimed at enhancing graph similarity and GED computations, inspiring state of the art approaches such as \cite{computing_graph_edit_distance_via_neural_graph_matching}.
+
+Following the choice of model which inspired the current state of the art, GedGNN\cite{computing_graph_edit_distance_via_neural_graph_matching}, in the following sections the following four models, SimGNN\cite{simgnn__a_neural_network_approach_to_fast_graph_similarity_computation}, GPN\cite{noah__neural_optimized_a*_search_algorithm_for_graph_edit_distance_computation}, TaGSim\cite{TaGSim_type_aware_graph_similarity_learning_and_computation}, and GedGNN\cite{computing_graph_edit_distance_via_neural_graph_matching} will be described in more detail.
 	
-	\subsection{SimGNN}
+	\section{SimGNN}
 	\label{sec:simgnn}
 	
 	The first innovative model that used neural networks is SimGNN \cite{simgnn__a_neural_network_approach_to_fast_graph_similarity_computation}, introduced in 2019. SimGNN serves as a foundational model in the field of graph similarity computation, in fact future models will often inherit its core concepts (such as the siamese layout architecture), making it the starting point of reference for anyone dealing with GED computation. 
@@ -78,7 +84,7 @@
 	\end{figure}
 
 	
-	\subsection{GPN}
+	\section{GPN}
 	\label{sec:gpn}
 	
 	In 2022, an innovative hybrid approach for computing GED was released.
@@ -102,7 +108,7 @@
 	\end{figure}
 	
 	
-	\subsection{TaGSim}
+	\section{TaGSim}
 	\label{sec:tagsim}
 	
 	In 2022, another innovative approach was released with TaGSim (Type-aware Graph Similarity) \cite{TaGSim_type_aware_graph_similarity_learning_and_computation}. The idea behind GED as a single value has been revaluated and it is now thought as the summation of three different values: $ged\_nc$ the number of node relabelling, $ged\_in$ the number of node insertions/deletions, $ged\_ie$ the number of edges insertions/deletions. 
@@ -123,7 +129,7 @@
 		\label{fig:tagsim_architecture}
 	\end{figure}
 
-	\subsection{GedGNN}
+	\section{GedGNN}
 	\label{sec:gedgnn}
 	
 	In 2023, the model that is considered the state of the art at the time of writing this (2024) is released with GedGNN (Graph Edit Distance via Neural Graph Matching) \cite{computing_graph_edit_distance_via_neural_graph_matching}. The idea behind this model is to try to put together all the best ideas from past's models including the basic siamese layout of SimGNN, the use of more advanced convolutional layers of GPN and the split of the GED metric from TaGSim while still allowing for the retrieval of an edit paths by taking inspiration from NOAH framework.
@@ -145,20 +151,19 @@
 		\label{fig:gedgnn_architecture}
 	\end{figure}
 	
-	\subsection{Encountered Gaps}
-	
-	In this research, some problems and concerns have been identified from the \href{https://github.com/ChengzhiPiao/GEDGNN}{codebase} of GedGNN. Most of these issues can be attributed to the fact that codes are copied from one project to another and reused by researchers without proper testing.
-	
-	The first problem is related to the code quality of the codebase. It is often poor and there is also no strong adherence to best practices. There are numerous method implementations that look very much like they do the same thing, too many classes, numerous questions, and no way of handling the errors. In some parts, the code appears to have been almost hard coded, thus, offers little room for modification. Also, the code can be hardly understood, and the comments that are given with the code are quite uninformative.
-	
-	Closely related to code quality and testing scenarios is the problem of scalability on GPUs. When trying to run for the first time the code as is on a GPU some errors also raised up, but apart from this, the models do not scale well on GPU hardware and this is an issue. Training on small datasets is possible on CPUs but when it comes to using large datasets for testing and training new models, issues arise with long training time per epoch.
-	
-	Another concern is that the codebase only permits the use of graphs with 10 nodes or less in training, testing, and validation cases. This could be attributed to the fact that there are complex imperative algorithms that are used in the software such as the k-best post-processing algorithm for reconstructing edit paths. In addition, for any model, the code fails when tested on the IMDB dataset. Additionally, despite the presence of artificial dataset generation code, it is not utilized, leading to confusion and unreachable code paths.
+\section{Identified issues in the GedGNN codebase}
+\label{sec:issues-codebase}
 
-	The training data, however, has issues that have been there from the time SimGNN was created. The same datasets are used over and over again, however, the most important problem is that approximate GEDs are used as labels instead of the exact one. These datasets are relatively small; graphs contain less than ten nodes, and with today’s hardware, we would not spend much time calculating exact GED. Also, in all codebases analyzed so far, the training is done in a way that for each pair of graphs in the training set there is a corresponding GED.
-	
-	However, the biggest problem has to do with the fact that there is no fair testing between models. It is still not well understood why so, but with the current state of the codebase, one cannot even attempt to test a model trained on one dataset with another dataset. This restriction may be to hide the fact that there is no generalization capability.
-	
-	In summary, the analysed codebase which presents GedGNN, TaGSim, SimGNN and GPN presents several significant challenges to overcome. These include problems with the reproducibility of the results, fair evaluations, scalability issues, poor code quality, unclear parameters and more. Clearly, resolving many of this issues would lead to a significant advancement in this field.
+ In this research, several problems and concerns have been identified within the \href{https://github.com/ChengzhiPiao/GEDGNN}{codebase of GedGNN}.
+
+\begin{description}
+    \item[Code Quality:] The GedGNN codebase was found to be fragile, difficult to extend and not well documented. There are numerous redundant method implementations, an excess of classes, and insufficient error handling. This makes it difficult to extend it with other models or variations in the workflow. In fact, in some instances, the code appears almost hard-coded and brittle. For example, the original code does not allow for training a model on one dataset and then testing it on another, thus preventing testing for out-of-distribution generalization. Additionally, the code expects the input to be a matrix of distances between graph couples, making it difficult to test on other datasets that do not follow this format.
+    \item[Scalability on GPUs:] The codebase also faces issues with scalability on GPUs. When attempting to run the code on a GPU for the first time, errors often arise. Moreover, the models do not scale well on GPU hardware. While training on small datasets is feasible on CPUs, using large datasets for training new models leads to long training times per epoch, posing a significant challenge.
+    \item[Graph Size Limitation:] The codebase only supports graphs with 10 nodes or fewer in training, testing, and validation scenarios. This limitation may be due to the complex algorithms used, such as the k-best post-processing algorithm for reconstructing edit paths. Additionally, the code fails when tested on the IMDB dataset. Despite the presence of artificial dataset generation code, it is not utilized, resulting in confusion and unreachable code paths.
+    \item[Training Data Issues:] High-quality data is crucial for the performance of deep learning models. However, the training data issues date back to the creation of SimGNN. The same small datasets, containing graphs with fewer than ten nodes, are reused repeatedly. The primary concern is that approximate GEDs are used as labels instead of exact ones, making the learned model an approximation of the approximation. For graphs of this size, calculating the GED exactly would be better and feasible. Additionally, the use of synthetic data, where graphs at known GEDs are synthetically generated, has not been seriously considered.
+    \item[Fair Testing Between Models:] The most significant problem is the lack of fair testing between models. Currently, models are tested by training them on each dataset and testing them on the respective test set of each dataset. This approach, at best, tests for in-distribution generalization but fails to test for out-of-distribution generalization. Out-of-distribution generalization is the ability of a model to perform well when tested with examples that are sufficiently different from those on which it was trained.
+\end{description}
+
+In summary, the analyzed codebase for GedGNN, TaGSim, SimGNN, and GPN present several significant challenges. These include issues with reproducibility of results, fair evaluations, scalability, poor code quality, and unclear parameters. Addressing these issues would significantly advance this field and improve the reliability and usability of these models.
 	
 \end{document}
