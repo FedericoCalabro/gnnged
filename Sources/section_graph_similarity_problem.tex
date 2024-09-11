@@ -1,12 +1,12 @@
 \documentclass[../Thesis.tex]{subfiles}
 \begin{document}
 	
-	\section{Graph Similarity Problem}
+	\chapter{Graph Similarity Problem}
 	\label{sec:graph_similarity_problem}
 	
 	Of particular interest is to understand whether two given graphs are similar or not, this question takes the name of \emph{graph similarity problem}. This problem could be of help in numerous domains and real world problems including  pattern recognition, computer vision, bioinformatics, social network analysis, and chemical informatics. In such fields, common problems can be modelled as graphs and comparing the structure pair's properties of those could be very beneficial. For instance, in bioinformatics, comparing protein interaction networks can reveal functional similarities between different proteins, while in social network analysis, it can help identify similar community structures within different social groups. Since graph similarity is very important, numerous metrics have been developed to measure graph similarity, each with its own strengths and limitations to take into account. In the following sections, it will be explored several metrics commonly used to measure graph similarity: Graph Isomorphism, Graph Kernels, and Graph Edit Distance (GED). Each method will be discussed in terms of its fundamental concepts, applications, and limitations, with a focus on the latter. Also, it is often desirable to retrieve the edit path from one graph to another in a straightforward manner to understand the specific transformations involved. However, we will focus only on the similarity metrics and will not address the retrieval of edit paths.
 	
-	\subsection{Graph Isomorphism}
+	\section{Graph Isomorphism}
 	
 	In graph theory, graph isomorphism is one of the fundamental concepts used to determine if two graphs are structurally identical. Two graphs $G_1 = (V_1, E_1)$ and $G_2 = (V_2, E_2)$ are isomorphic if there is a bijection $f: V_1 \to V_2$ such that any two vertices $u$ and $v$ in $G_1$ are adjacent if and only if $f(u)$ and $f(v)$ are adjacent in $G_2$. Formally, $G_1$ and $G_2$ are isomorphic if:
 	\[
@@ -16,7 +16,7 @@
 
 	\subfile{../Tikz/tikz_graph_isomorphism}
 	
-	\subsection{Graph Kernels}
+	\section{Graph Kernels}
 	
 	A common solution in optimization theory when trying to separate two given dataset is to artificially increase their spatial dimension by using kernel tricks \cite{kerneltrick}. In the same way graph kernels transforms graphs into high-dimensional vectors where it is easier to compare them and exploit this mechanism to compute a similarity metric based on their structural attributes and properties. Common types of graph kernels include:
 	
@@ -30,7 +30,7 @@
 	
 	\subfile{../Tikz/tikz_graph_kernels}
 	
-	\subsection{Graph Edit Distance (GED)}
+	\section{Graph Edit Distance (GED)}
 	
 	One of the most flexible and informative metric that measure the similarity between two graphs $G_1 = (V_1, E_1)$ and $G_2 = (V_2, E_2)$ is the \emph{graph edit distance} (GED). It quantifies similarity by determining the minimum cost required to transform $G_1$ into $G_2$ by means of a series of atomic operations. These operations include but are not limited to vertex and edge insertions, deletions, and substitutions. The cost of each operation is determined by a predefined cost function which is usually $1$.
 	

@@ -1,12 +1,12 @@
 \documentclass[../Thesis.tex]{subfiles}
 \begin{document}
 	
-	\section{Neural Networks}
+	\chapter{Neural Networks}
 	\label{sec:neural_networks}
 	
 	A \emph{neural network} is a complex computational model inspired by anatomy of the human brain. These models are designed to learn and particularly to recognize patterns in a given data by imitating the functionalities of biological neurons. In fact, the building blocks of every existing neural network are called neurons or nodes. Each of these unit performs simple computations that when combined together allow to tackle a wide range of tasks.
 	
-	\subsection{Basic Structure of a Neural Network}
+	\section{Basic Structure of a Neural Network}
 	
 	Neurons in a neural networks are organized in \emph{layers} which determine the structure and the capability of the net itself. There is a plenitude of way to organize models, but the simplest one [\autoref{fig:basic-nn}] consists only of three layers.
 	
@@ -40,7 +40,7 @@
 		\]
 	\end{itemize}
 	
-\subsection{Training Neural Networks}
+\section{Training Neural Networks}
 
 Supervised Learning is a machine learning approach where the data is said to be \emph{labeled}, meaning that for each \emph{example} its \emph{class} is known. There exist \href{https://en.wikipedia.org/wiki/Unsupervised_learning}{Unsupervised} and \href{https://en.wikipedia.org/wiki/Weak_supervision}{Semi-supervised} learning, differents types of automatic learning that will not be discussed in detail as they are not used in this work. Weights are numerical values associated with the connections between neurons, usually being in the range [0, 1] when the data is normalized. Training a neural networks means to find the optimal weights values for each connection so to minimize the error between model's prediction and the actual target values. This is usually achieved through the employment of a technique known as \emph{backpropagation} and the usage of an optimization algorithm such as \emph{descent gradient}. The training process is conducted iteratively until net's performance start to degrade or simply it stops learning. This is done with the usage of a dataset usually split in three parts:
 
@@ -85,7 +85,7 @@ Supervised Learning is a machine learning approach where the data is said to be 
 	
 	\subfile{../Tikz/tikz_gradient_descent}
 	
-	\subsection{Advanced Topics in Neural Networks}
+	\section{Advanced Topics in Neural Networks}
 	
 	\subsubsection{Deep Neural Networks}
 	\emph{Deep neural networks} (DNN) [\autoref{fig:deep-nn}] differ from simple ones for having multiple hidden layers between the input and output layers. The increased depth allows DNNs to model data of higher order of complexity with respect to simple nets, often allowing for better performances. Each (hidden) layer in a DNN can be thought as learning at a different level of abstraction, with the early layers capturing low-level features and deeper layers capturing high-level features. For instance in a recognizing image system first edges and textures are recognized to later form shapes and objects. This hierarchical learning feature makes DNNs extremely powerful for tasks such as image and speech recognition, natural language processing, and even playing strategic games. Training DNNs, however, requires large amounts of data and computational power, and often employs many different techniques such as dropout and batch normalization to improve performance and prevent overfitting.

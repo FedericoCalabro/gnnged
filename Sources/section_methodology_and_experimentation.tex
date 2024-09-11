@@ -1,11 +1,11 @@
 \documentclass[../Thesis.tex]{subfiles}
 \begin{document}
-	\section{Methodology and Experimentation}
+	\chapter{Methodology and Experimentation}
 	\label{sec:methodology_and_experimentation}
 	
 	Working with high-quality datasets is crucial for developing performant models. However, in \cite{computing_graph_edit_distance_via_neural_graph_matching}, the data, particularly the GED labels, are mostly approximations, which negatively impacts model training and performance. A method for generating artificial data is detailed in [\autoref{sec:artificial_dataset_generation}], while the results of fair testing are summarized in the tables found in [\autoref{sec:experiments_results}]
 	
-	\subsection{Artificial Dataset Generation}
+	\section{Artificial Dataset Generation}
 	\label{sec:artificial_dataset_generation}
 
 	The proposed code is publicly available on \href{https://github.com/FedericoCalabro/gnnged/blob/vldb/1.%20synthetic_dataset_v2.ipynb}{GitHub} and is meant as a starting point for generating an high quality dataset composed of exact (TaGSim like) GED values along with randomly generated graphs at fixed distances.
@@ -32,7 +32,7 @@
 	\subfile{../Codes/dataset_generation_example}
 	With [\autoref{code:dataset_generation_example}] is an example of how to put all the pieces together to actually create a custom dataset and save it to disk in a format suitable GedGNN. With this specific code, it will be generated a dataset called \textit{Medium} (more information in \autoref{sec:experiments_results}) consisting of 1000 graphs, starting from random graph called $start$ in an \textit{incremental} way; then the data is processed to retrieve GED information for each pair of graphs and the whole is split into a training set (80\%) and a test set (20\%).
 	
-	\subsection{Experiments and Results}
+	\section{Experiments and Results}
 	\label{sec:experiments_results}
 	
 	For experimenting and conducting a fair evaluation of the models, two well known datasets, \href{https://paperswithcode.com/dataset/imdb-multi}{IMDB} and \href{https://paperswithcode.com/dataset/linux}{Linux}, as well as two artificially generated datasets, \emph{1000g\_100n} and \emph{Medium} have been employed:
@@ -51,7 +51,7 @@
 		\item \textbf{Accuracy (acc)}: Measures the proportion of correct GED predictions over the total predicted GEDs.
 	\end{itemize}
 	
-	Since predicting GED 100\% accurately is very hard for a neural network, the most relevant metric in this context will be the MAE: it is important that the net is very close to the real value.
+	Since predicting GED 100\% accurately is very hard for a neural network, the most relevant metrics in this context will be the MAE and MSE.
 	
 	\begin{table}[H]
 		\centering
@@ -115,7 +115,7 @@
 		\label{table:gpn}
 	\end{table}
 	
-	\emph{GPN} seems to be an outlier, since reproducing its original performance has not been possible. As shown in [\autoref{table:gpn}], the model does perform bad in every associated scenario.
+	\emph{GPN} seems to be an outlier, since reproducing its original performance has not been possible. As shown in [\autoref{table:gpn}], the model does perform poorly in every associated scenario.
 	
 	\begin{table}[H]
 		\centering
